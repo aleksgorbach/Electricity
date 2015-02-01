@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="~/Content/site.css" />
+</head>
+<body>
+    <header>
+        Расчеты параметров электроснабжения
+    </header>
+    <main>
+        <section id="navigation">
+            <nav>
+                <ul class="nav nav-tabs">
+                    <li><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home"></span> Главная</a></li>
+                    <li><a href="@Url.Action("TransformatorLoss", "Home")">Расчет трансформатора</a></li>
+                    <li><a href="@Url.Action("TransmissionLoss", "Home")">Расчет линий передач</a></li>
+                </ul>
+            </nav>
+        </section>
+        <section id="main-section">
+            @RenderBody()
+        </section>
+    </main>
+    <footer></footer>
+
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/menu.js"></script>
+</body>
+</html>

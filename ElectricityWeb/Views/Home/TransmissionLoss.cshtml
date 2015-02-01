@@ -1,0 +1,60 @@
+﻿@model ElectricityWeb.Models.Losses.TransmissionLossModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Потери в линиях электропередач";
+}
+
+@using (Html.BeginForm("TransmissionLoss", "Home", FormMethod.Post)) {
+    <fieldset>
+        <div>
+            <h1>
+                <span>@ViewBag.Error</span>
+            </h1>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.PhaseCount)
+            @Html.TextBoxFor(x => Model.PhaseCount, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => Model.PhaseCount)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.Resistivity)
+            @Html.TextBoxFor(x => Model.Resistivity, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => Model.Resistivity)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.Current)
+            @Html.TextBoxFor(x => Model.Current, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => Model.Current)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.Length)
+            @Html.TextBoxFor(x => Model.Length, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => Model.Length)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.Size)
+            @Html.TextBoxFor(x => Model.Size, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => Model.Size)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.Time)
+            @Html.TextBoxFor(x => Model.Time, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => Model.Time)
+        </div>
+
+        <div>
+            <input type="submit" value="Рассчитать" class="btn btn-primary"/>
+        </div>
+    </fieldset>
+}
+
+@if (Model.Value > 0) {
+    <div class="result">Потери: @Model.Value</div>
+}

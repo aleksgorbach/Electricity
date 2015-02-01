@@ -1,0 +1,81 @@
+﻿@model ElectricityWeb.Models.Losses.TransformatorLossModel
+
+@{
+    ViewBag.Title = "TransformatorLoss";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="calcs">
+    @using (Html.BeginForm("TransformatorLoss", "Home", FormMethod.Post, new { @class = "input-form" })) {
+        <fieldset>
+            <div class="form-group">
+                @Html.LabelFor(x => Model.NominalPower, new { @class = "control-label" })
+                <div class="input-group">
+                    @Html.TextBoxFor(x => Model.NominalPower, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.NominalPowerUnits</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => Model.NominalVoltage)
+                <div class="input-group">
+                    @Html.TextBoxFor(x => Model.NominalVoltage, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.NominalVoltageUnits</span>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => Model.ConsumedEnergy)
+                <div class="input-group">
+                    @Html.TextBoxFor(x => Model.ConsumedEnergy, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.ConsumedEnergyUnits</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => Model.IdlingPowerLoss)
+                <div class="input-group">
+                    @Html.TextBoxFor(x => Model.IdlingPowerLoss, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.IdlingPowerLossUnits</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => Model.ShortCircuitLoss)
+                <div class="input-group">
+                    @Html.TextBoxFor(x => Model.ShortCircuitLoss, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.ShortCircuitLossUnits</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => Model.LoadedHourCount)
+                <div class="input-group">
+                    @Html.TextBoxFor(x => Model.LoadedHourCount, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.LoadedHourCountUnits</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => Model.ConnectedTime)
+                <div class="input-group">
+                    @Html.TextBoxFor(x => Model.ConnectedTime, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.ConnectedTimeUnits</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Рассчитать" class="btn btn-primary" />
+            </div>
+        </fieldset>
+    }
+    @if (Model.Value > 0) {
+        <div class="result">Потери: @Model.Value</div>
+    }
+</section>
+
+<section class="visualizing">
+    <img src="~/Content/Images/transformator.png"/>
+</section>
+
