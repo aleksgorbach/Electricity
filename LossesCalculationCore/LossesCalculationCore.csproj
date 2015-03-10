@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Engine\AsyncEngine.cs" />
     <Compile Include="Engine\ParallelEngine.cs" />
+    <Compile Include="Engine\SerialEngine.cs" />
     <Compile Include="IValuable.cs" />
     <Compile Include="Losses\TransformatorLoss.cs" />
     <Compile Include="Losses\TransmissionLoss.cs" />

@@ -116,10 +116,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\IsNumericAttribute.cs" />
+    <Compile Include="Controllers\EngineController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Engine\AsyncEngineModel.cs" />
     <Compile Include="Models\Losses\TransformatorLossModel.cs" />
     <Compile Include="Models\Losses\TransmissionLossModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -168,6 +170,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\TransmissionLoss.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Engine\Async.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,14 +1,8 @@
-﻿body {
-    background-color: #ffffff;
-}
+﻿@import url(http://fonts.googleapis.com/css?family=Lora);
 
-header {
-    height: 80px;
-    background-color: #ecf8fd;
-    text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-    background-image: url(Images/bg.png);
+body {
+    background-color: #b1c3cd;
+    
 }
 
 .input-group {
@@ -28,7 +22,9 @@ header {
     float: left;
 }
 
-#main-section {
-    margin: 0 auto;
+main {
+    margin: 100px auto 0 auto;
     width: 60%;
+    font-family: 'Lora', serif;
+    color: #222;
 }

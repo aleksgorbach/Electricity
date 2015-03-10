@@ -7,24 +7,34 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="~/Content/site.css" />
+    <link rel="stylesheet" href="~/Content/menu.css"/>
 </head>
 <body>
     <header>
-        Расчеты параметров электроснабжения
+        <nav role="navigation">
+            <ul>
+                <li><a href="@Url.Action("Index", "Home")">Главная</a></li>
+                <li>
+                    <a href="#">Потери</a>
+                    <ul>
+                        <li><a href="@Url.Action("TransformatorLoss", "Home")">Потери в трансформаторе</a></li>
+                        <li><a href="@Url.Action("TransmissionLoss", "Home")">Потери в линиях передач</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Двигатели</a>
+                    <ul>
+                        <li><a href="@Url.Action("Async", "Engine")">Асинхронный двигатель</a></li>
+                        <li><a href="">Двигатель параллельного возбуждения</a></li>
+                        <li><a href="">Двигатель последовательного возбуждения</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">О сайте</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
-        <section id="navigation">
-            <nav>
-                <ul class="nav nav-tabs">
-                    <li><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home"></span> Главная</a></li>
-                    <li><a href="@Url.Action("TransformatorLoss", "Home")">Расчет трансформатора</a></li>
-                    <li><a href="@Url.Action("TransmissionLoss", "Home")">Расчет линий передач</a></li>
-                </ul>
-            </nav>
-        </section>
-        <section id="main-section">
-            @RenderBody()
-        </section>
+        @RenderBody()
     </main>
     <footer></footer>
 

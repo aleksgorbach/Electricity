@@ -1,12 +1,12 @@
-﻿@model ElectricityWeb.Models.Losses.TransformatorLossModel
+﻿@model ElectricityWeb.Models.Engines.AsyncEngineModel
 
 @{
-    ViewBag.Title = "Потери в трансформаторе";
+    ViewBag.Title = "Асинхронный двигатель";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section class="calcs">
-    @using (Html.BeginForm("TransformatorLoss", "Home", FormMethod.Post, new { @class = "input-form" })) {
+    @using (Html.BeginForm("Async", "Engine", FormMethod.Post, new { @class = "input-form" })) {
         <fieldset>
             <div class="form-group">
                 @Html.LabelFor(x => Model.NominalPower, new { @class = "control-label" })
@@ -22,46 +22,45 @@
                     @Html.TextBoxFor(x => Model.NominalVoltage, new { @class = "form-control" })
                     <span class="input-group-addon">@Model.NominalVoltageUnits</span>
                 </div>
-
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(x => Model.ConsumedEnergy)
+                @Html.LabelFor(x => Model.Frequency)
                 <div class="input-group">
-                    @Html.TextBoxFor(x => Model.ConsumedEnergy, new { @class = "form-control" })
-                    <span class="input-group-addon">@Model.ConsumedEnergyUnits</span>
+                    @Html.TextBoxFor(x => Model.Frequency, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.FrequencyUnits</span>
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(x => Model.IdlingPowerLoss)
+                @Html.LabelFor(x => Model.UsingCoefficient)
                 <div class="input-group">
-                    @Html.TextBoxFor(x => Model.IdlingPowerLoss, new { @class = "form-control" })
-                    <span class="input-group-addon">@Model.IdlingPowerLossUnits</span>
+                    @Html.TextBoxFor(x => Model.UsingCoefficient, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.UsingCoefficientUnits</span>
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(x => Model.ShortCircuitLoss)
+                @Html.LabelFor(x => Model.Cosinus)
                 <div class="input-group">
-                    @Html.TextBoxFor(x => Model.ShortCircuitLoss, new { @class = "form-control" })
-                    <span class="input-group-addon">@Model.ShortCircuitLossUnits</span>
+                    @Html.TextBoxFor(x => Model.Cosinus, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.CosinusUnits</span>
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(x => Model.LoadedHourCount)
+                @Html.LabelFor(x => Model.CurrentsRelation)
                 <div class="input-group">
-                    @Html.TextBoxFor(x => Model.LoadedHourCount, new { @class = "form-control" })
-                    <span class="input-group-addon">@Model.LoadedHourCountUnits</span>
+                    @Html.TextBoxFor(x => Model.CurrentsRelation, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.CurrentsRelationUnits</span>
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(x => Model.ConnectedTime)
+                @Html.LabelFor(x => Model.MomentsRelation)
                 <div class="input-group">
-                    @Html.TextBoxFor(x => Model.ConnectedTime, new { @class = "form-control" })
-                    <span class="input-group-addon">@Model.ConnectedTimeUnits</span>
+                    @Html.TextBoxFor(x => Model.MomentsRelation, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.MomentsRelationUnits</span>
                 </div>
             </div>
 
@@ -70,12 +69,4 @@
             </div>
         </fieldset>
     }
-    @if (Model.Value > 0) {
-        <div class="result">Потери: @Model.Value</div>
-    }
 </section>
-
-<section class="visualizing">
-    <img src="~/Content/Images/transformator.png"/>
-</section>
-

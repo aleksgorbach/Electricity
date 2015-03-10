@@ -17,7 +17,7 @@ namespace LossesCalculationCore.Engine {
             var activePower = nomPower / useCoef;
             var nominalMoment = 9.55 * nomPower / rotNom;
             var criticalMoment = momRel * nominalMoment;
-            var nominalCurrent = nomPower / (1.733 * cos * useCoef * nomVoltage);
+            var nominalCurrent = nomPower / (1.733 * cos * useCoef * nomVoltage / 100);
             var startingCurrent = currRel * nominalCurrent;
             var polesPairCount = (int)(60 * 50 / STATOR_ROTATING_FREQUENCY);
             var nominalSlip = 1 - (double)rotNom / STATOR_ROTATING_FREQUENCY;
@@ -59,7 +59,7 @@ namespace LossesCalculationCore.Engine {
             public double CriticalMoment { get; private set; }
             public double NominalCurrent { get; private set; }
             public double StartingCurrent { get; private set; }
-            public double PolesPairCount { get; private set; }
+            public int PolesPairCount { get; private set; }
             public double NominalSlip { get; private set; }
             public double CriticalSlip { get; private set; }
             public IEnumerable<CharasteristicItem> CharasteristicTable { get; private set; }
@@ -71,7 +71,7 @@ namespace LossesCalculationCore.Engine {
                 double criticalMoment,
                 double nominalCurrent,
                 double startingCurrent,
-                double polesPairCount,
+                int polesPairCount,
                 double nominalSlip,
                 double criticalSlip,
                 IEnumerable<CharasteristicItem> charasteristicTable,
