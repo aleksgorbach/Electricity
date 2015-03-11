@@ -5,7 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<section class="page-logo">
+    <img src="~/Content/Images/engine.png" />
+</section>
 <section class="calcs">
+    @if (!string.IsNullOrEmpty(ViewBag.Error)) {
+        <div class="error">@ViewBag.Error</div>
+    }
     @using (Html.BeginForm("Async", "Engine", FormMethod.Post, new { @class = "input-form" })) {
         <fieldset>
             <div class="form-group">
@@ -65,8 +71,84 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Рассчитать" class="btn btn-primary" />
+                <input type="submit" value="Рассчитать" class="btn btn-primary"/>
             </div>
         </fieldset>
+    }
+</section>
+<section class="results">
+    @if (Model.HasResult) {
+        <div class="form-group">
+            @Html.LabelFor(x => Model.ActivePower, new { @class = "control-label" })
+            <div class="input-group">
+                @Html.DisplayFor(x => Model.ActivePower, new { @class = "form-control" })
+                @Model.ActivePowerUnits
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.NominalMoment, new { @class = "control-label" })
+            <div class="input-group">
+                @Html.DisplayFor(x => Model.NominalMoment, new { @class = "form-control" })
+                @Model.NominalMomentUnits
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.CriticalMoment, new { @class = "control-label" })
+            <div class="input-group">
+                @Html.DisplayFor(x => Model.CriticalMoment, new { @class = "form-control" })
+                @Model.CriticalMomentUnits
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.NominalCurrent, new { @class = "control-label" })
+            <div class="input-group">
+                @Html.DisplayFor(x => Model.NominalCurrent, new { @class = "form-control" })
+                @Model.NominalCurrentUnits
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.StartingCurrent, new { @class = "control-label" })
+            <div class="input-group">
+                @Html.DisplayFor(x => Model.StartingCurrent, new { @class = "form-control" })
+                @Model.StartingCurrentUnits
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.PolesPairCount, new { @class = "control-label" })
+            <div class="input-group">
+                @Html.DisplayFor(x => Model.PolesPairCount, new { @class = "form-control" })
+                @Model.PolesPairCountUnits
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.NominalSlip, new { @class = "control-label" })
+            <div class="input-group">
+                @Html.DisplayFor(x => Model.NominalSlip, new { @class = "form-control" })
+                @Model.NominalSlipUnits
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.CriticalSlip, new { @class = "control-label" })
+            <div class="input-group">
+                @Html.DisplayFor(x => Model.CriticalSlip, new { @class = "form-control" })
+                @Model.CriticalSlipUnits
+            </div>
+        </div>
+
+        <div class="form-group">
+            @if (Model.CanStart) {
+                <text>Запуск возможен</text>
+            }
+            else {
+                <text>Запуск невозможен</text>
+            }
+        </div>
     }
 </section>

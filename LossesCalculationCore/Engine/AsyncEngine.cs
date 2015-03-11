@@ -5,6 +5,7 @@ using System.Linq;
 namespace LossesCalculationCore.Engine {
     public class AsyncEngine {
         public const int STATOR_ROTATING_FREQUENCY = 1500;
+        private const double TOLERANCE = 0.001;
 
         public static Charasteristic GetCharasteristic(
             double nomPower,
@@ -14,10 +15,14 @@ namespace LossesCalculationCore.Engine {
             double cos,
             double currRel,
             double momRel) {
-            var activePower = nomPower / useCoef;
+            if (Math.Abs(nomPower) < TOLERANCE || rotNom == 0 || Math.Abs(useCoef) < TOLERANCE
+                || Math.Abs(momRel) < TOLERANCE || Math.Abs(currRel) < TOLERANCE || Math.Abs(cos) < TOLERANCE) {
+                throw new DivideByZeroException();
+            }
+            var activePower = nomPower / useCoef * 100;
             var nominalMoment = 9.55 * nomPower / rotNom;
             var criticalMoment = momRel * nominalMoment;
-            var nominalCurrent = nomPower / (1.733 * cos * useCoef * nomVoltage / 100);
+            var nominalCurrent = nomPower * 1000 / (1.733 * cos * useCoef * nomVoltage / 100);
             var startingCurrent = currRel * nominalCurrent;
             var polesPairCount = (int)(60 * 50 / STATOR_ROTATING_FREQUENCY);
             var nominalSlip = 1 - (double)rotNom / STATOR_ROTATING_FREQUENCY;

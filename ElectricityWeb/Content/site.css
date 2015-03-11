@@ -1,4 +1,4 @@
-﻿@import url(http://fonts.googleapis.com/css?family=Lora);
+﻿@import url(http://fonts.googleapis.com/css?family=Scada&subset=latin,cyrillic);
 
 body {
     background-color: #b1c3cd;
@@ -18,13 +18,28 @@ body {
     font-weight: bold;
 }
 
-.calcs {
+.error {
+    color: #a12525;
+}
+
+.page-logo {
     float: left;
+    width: 30%;
+}
+
+.calcs {
+    display: inline-block;
+    width: 30%;
+}
+
+.results {
+    float: right;
+    width: 40%;
 }
 
 main {
     margin: 100px auto 0 auto;
-    width: 60%;
-    font-family: 'Lora', serif;
+    width: 80%;
+    font-family: 'Scada', sans-serif;
     color: #222;
 }

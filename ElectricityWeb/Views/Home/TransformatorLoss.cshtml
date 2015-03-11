@@ -5,7 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<section class="page-logo">
+    <img src="~/Content/Images/transformator.png" />
+</section>
+
 <section class="calcs">
+    @if (!string.IsNullOrEmpty(ViewBag.Error)) {
+        <div class="error">@ViewBag.Error</div>
+    }
     @using (Html.BeginForm("TransformatorLoss", "Home", FormMethod.Post, new { @class = "input-form" })) {
         <fieldset>
             <div class="form-group">
@@ -66,16 +73,21 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Рассчитать" class="btn btn-primary" />
+                <input type="submit" value="Рассчитать" class="btn btn-primary"/>
             </div>
         </fieldset>
     }
-    @if (Model.Value > 0) {
-        <div class="result">Потери: @Model.Value</div>
-    }
 </section>
 
-<section class="visualizing">
-    <img src="~/Content/Images/transformator.png"/>
+<section class="results">
+    @if (Model.HasResult) {
+        <div class="form-group">
+            @Html.LabelFor(x => Model.Loss, new { @class = "control-label" })
+            <div class="input-group">
+                @Html.DisplayFor(x => Model.Loss, new { @class = "form-control" })
+                @Model.LossUnits
+            </div>
+        </div>
+    }
 </section>
 

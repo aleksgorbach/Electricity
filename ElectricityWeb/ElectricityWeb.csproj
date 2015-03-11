@@ -130,7 +130,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\Images\engine.png" />
     <Content Include="Content\Images\transformator.png" />
+    <Content Include="Content\Images\transmission.png" />
     <Content Include="Content\site.css" />
     <Content Include="Content\menu.css" />
     <Content Include="Global.asax" />

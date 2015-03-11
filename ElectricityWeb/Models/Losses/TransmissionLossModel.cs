@@ -89,7 +89,7 @@ namespace ElectricityWeb.Models.Losses {
         }
 
         [Display(Name = "Потери")]
-        public double Value { get; set; }
+        public double Loss { get; set; }
         public string LossUnits {
             get {
                 return "кВт*час";
@@ -98,5 +98,7 @@ namespace ElectricityWeb.Models.Losses {
 
         #endregion Parameter fields
 
+
+        public bool HasResult { get; set; }
     }
 }

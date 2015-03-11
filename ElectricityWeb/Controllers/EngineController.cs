@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 
 using ElectricityWeb.Models.Engines;
 
@@ -25,18 +26,24 @@ namespace ElectricityWeb.Controllers
                 return View(model);
             }
 
-            var charasteristic = AsyncEngine.GetCharasteristic(
-                model.NominalPower,
-                model.NominalVoltage,
-                model.Frequency,
-                model.UsingCoefficient,
-                model.Cosinus,
-                model.CurrentsRelation,
-                model.MomentsRelation);
-            model.SetCharacteristic(charasteristic);
-            model.HasResult = true;
-
-            return View(model);
+            try {
+                var charasteristic = AsyncEngine.GetCharasteristic(
+                    model.NominalPower,
+                    model.NominalVoltage,
+                    model.Frequency,
+                    model.UsingCoefficient,
+                    model.Cosinus,
+                    model.CurrentsRelation,
+                    model.MomentsRelation);
+                model.SetCharacteristic(charasteristic);
+                model.HasResult = true;
+                return View(model);
+            }
+            catch (DivideByZeroException) {
+                model.HasResult = false;
+                ViewBag.Error = "Введите корректные данные";
+                return View(model);
+            }
         }
     }
 }
