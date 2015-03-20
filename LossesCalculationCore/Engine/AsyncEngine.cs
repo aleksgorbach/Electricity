@@ -15,26 +15,16 @@ namespace LossesCalculationCore.Engine {
             double cos,
             double currRel,
             double momRel) {
-            if (Math.Abs(nomPower) < TOLERANCE || rotNom == 0 || Math.Abs(useCoef) < TOLERANCE
-                || Math.Abs(momRel) < TOLERANCE || Math.Abs(currRel) < TOLERANCE || Math.Abs(cos) < TOLERANCE) {
-                throw new DivideByZeroException();
-            }
             var activePower = nomPower / useCoef * 100;
-            var nominalMoment = 9.55 * nomPower / rotNom;
+            var nominalMoment = 9550 * nomPower / rotNom;
             var criticalMoment = momRel * nominalMoment;
             var nominalCurrent = nomPower * 1000 / (1.733 * cos * useCoef * nomVoltage / 100);
             var startingCurrent = currRel * nominalCurrent;
             var polesPairCount = (int)(60 * 50 / STATOR_ROTATING_FREQUENCY);
             var nominalSlip = 1 - (double)rotNom / STATOR_ROTATING_FREQUENCY;
             var criticalSlip = nominalSlip * (momRel + Math.Sqrt(momRel * momRel - 1));
-            var slips = new List<double> { 0, 0.2, 0.4, 0.6, 0.8, 1, nominalSlip, criticalSlip };
-            var charasteristicTable =
-                slips.Select(x => new CharasteristicItem(x, criticalMoment, criticalSlip)).OrderBy(x => x.Slip).ToList();
-            var canStart = charasteristicTable.First(x => x.Slip == 1).Moment > criticalMoment;
-            return new Charasteristic(activePower, nominalMoment, criticalMoment, nominalCurrent, startingCurrent, polesPairCount, nominalSlip, criticalSlip, charasteristicTable, canStart);
+            return new Charasteristic(activePower, nominalMoment, criticalMoment, nominalCurrent, startingCurrent, polesPairCount, nominalSlip, criticalSlip);
         }
-
-         
 
         public string Description {
             get {
@@ -42,21 +32,7 @@ namespace LossesCalculationCore.Engine {
             }
         }
 
-        public class CharasteristicItem {
-            public double Count { get; private set; }
-            public double Moment { get; private set; }
-            public double Slip { get; private set; }
-
-            public CharasteristicItem(double slip, double criticalMoment, double criticalSlip) {
-                Slip = slip;
-                Count = STATOR_ROTATING_FREQUENCY*(1 - slip);
-                if (criticalSlip == 0 || slip == 0) {
-                    Moment = 0;
-                } else {
-                    Moment = 2 * criticalMoment / (slip / criticalSlip + criticalSlip / slip);
-                }
-            }
-        }
+        
 
         public class Charasteristic {
             public double ActivePower { get; private set; }
@@ -67,7 +43,6 @@ namespace LossesCalculationCore.Engine {
             public int PolesPairCount { get; private set; }
             public double NominalSlip { get; private set; }
             public double CriticalSlip { get; private set; }
-            public IEnumerable<CharasteristicItem> CharasteristicTable { get; private set; }
             public bool CanStart { get; private set; }
 
             public Charasteristic(
@@ -78,9 +53,7 @@ namespace LossesCalculationCore.Engine {
                 double startingCurrent,
                 int polesPairCount,
                 double nominalSlip,
-                double criticalSlip,
-                IEnumerable<CharasteristicItem> charasteristicTable,
-                bool canStart) {
+                double criticalSlip) {
                 ActivePower = activePower;
                 NominalMoment = nominalMoment;
                 CriticalMoment = criticalMoment;
@@ -89,8 +62,34 @@ namespace LossesCalculationCore.Engine {
                 PolesPairCount = polesPairCount;
                 NominalSlip = nominalSlip;
                 CriticalSlip = criticalSlip;
-                CharasteristicTable = charasteristicTable;
-                CanStart = canStart;
+                CanStart = GetCharacteristicItem(1, CriticalMoment, CriticalSlip).Moment > NominalMoment;
+            }
+
+            private CharasteristicItem GetCharacteristicItem(double slip, double criticalMoment, double criticalSlip) {
+                var s = slip;
+                var c = STATOR_ROTATING_FREQUENCY * (1 - slip);
+                double moment;
+                if (criticalSlip == 0 || slip == 0) {
+                    moment = 0;
+                }
+                else {
+                    moment = 2 * criticalMoment / (slip / criticalSlip + criticalSlip / slip);
+                }
+                return new CharasteristicItem{Slip = s, Count = c, Moment = moment};
+            }
+
+            public IEnumerable<CharasteristicItem> CharasteristicTable {
+                get {
+                    var slips = new List<double> { 0, 0.2, 0.4, 0.6, 0.8, 1, NominalSlip, CriticalSlip };
+                    return slips.Select(x => GetCharacteristicItem(x, CriticalMoment, CriticalSlip))
+                        .OrderBy(x => x.Moment);
+                }
+            }
+
+            public class CharasteristicItem {
+                public double Count { get; set; }
+                public double Moment { get; set; }
+                public double Slip { get; set; }
             }
         }
     }

@@ -1,12 +1,14 @@
-﻿@model ElectricityWeb.Models.Engines.AsyncEngineModel
+﻿@model ElectricityWeb.Models.Engine.AsyncEngineModel
 
 @{
     ViewBag.Title = "Асинхронный двигатель";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script src="~/Scripts/Highcharts-4.0.1/js/highcharts.js"></script>
+
 <section class="page-logo">
-    <img src="~/Content/Images/engine.png" />
+    <img src="~/Content/Images/engine.png" class="visualizing"/>
 </section>
 <section class="calcs">
     @if (!string.IsNullOrEmpty(ViewBag.Error)) {
@@ -149,6 +151,9 @@
             else {
                 <text>Запуск невозможен</text>
             }
+        </div>
+        <div id="async-chart">
+            @Html.Action("AsyncChart", "Engine", new {model=Model})
         </div>
     }
 </section>

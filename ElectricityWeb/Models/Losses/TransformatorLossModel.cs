@@ -3,7 +3,7 @@
 using ElectricityWeb.Attributes;
 
 namespace ElectricityWeb.Models.Losses {
-    public class TransformatorLossModel {
+    public class TransformatorLossModel : ResultModel {
         #region Constructors
 
         public TransformatorLossModel(
@@ -109,8 +109,5 @@ namespace ElectricityWeb.Models.Losses {
         }
 
         #endregion Parameter fields
-
-        public bool HasResult { get; set; }
-
     }
 }

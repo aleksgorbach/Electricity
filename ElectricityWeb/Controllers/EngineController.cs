@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 
-using ElectricityWeb.Models.Engines;
+using DotNet.Highcharts;
+using DotNet.Highcharts.Enums;
+using DotNet.Highcharts.Helpers;
+using DotNet.Highcharts.Options;
+
+using ElectricityWeb.Models.Engine;
 
 using LossesCalculationCore.Engine;
 
-namespace ElectricityWeb.Controllers
-{
-    public class EngineController : Controller
-    {
+namespace ElectricityWeb.Controllers {
+    public class EngineController : Controller {
         public ActionResult Index() {
             return RedirectToAction("Async");
         }
@@ -26,24 +30,82 @@ namespace ElectricityWeb.Controllers
                 return View(model);
             }
 
-            try {
-                var charasteristic = AsyncEngine.GetCharasteristic(
-                    model.NominalPower,
-                    model.NominalVoltage,
-                    model.Frequency,
-                    model.UsingCoefficient,
-                    model.Cosinus,
-                    model.CurrentsRelation,
-                    model.MomentsRelation);
-                model.SetCharacteristic(charasteristic);
-                model.HasResult = true;
-                return View(model);
-            }
-            catch (DivideByZeroException) {
+            var charasteristic = AsyncEngine.GetCharasteristic(
+                model.NominalPower.Value,
+                model.NominalVoltage.Value,
+                model.Frequency.Value,
+                model.UsingCoefficient.Value,
+                model.Cosinus.Value,
+                model.CurrentsRelation.Value,
+                model.MomentsRelation.Value);
+            model.SetCharacteristic(charasteristic);
+            model.HasResult = true;
+            return View(model);
+        }
+
+        public ActionResult AsyncChart(AsyncEngineModel model) {
+            var xAxis = model.CharasteristicTable.Select(x => x.Moment.ToString()).ToArray();
+            var yAxis = model.CharasteristicTable.Select(x => new object[] { x.Count }).ToArray();
+
+
+            var chart = new Highcharts("chart");
+            chart.InitChart(new Chart { DefaultSeriesType = ChartTypes.Line });
+            chart.SetXAxis(new XAxis { Categories = xAxis });
+            chart.SetSeries(new[] { new Series { Data = new Data(yAxis) } });
+            return PartialView(chart);
+        }
+
+        [HttpGet]
+        public ActionResult Parallel() {
+            var model = new ParallelEngineModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Parallel(ParallelEngineModel model) {
+            if (!ModelState.IsValid) {
                 model.HasResult = false;
-                ViewBag.Error = "Введите корректные данные";
                 return View(model);
             }
+
+            var charasteristic = ParallelEngine.GetCharasteristic(
+                model.NominalVoltage.Value,
+                model.NominalPower.Value,
+                model.Frequency.Value,
+                model.Efficiency.Value,
+                model.ExcitationPercent.Value,
+                model.AnchorPower.Value,
+                model.CurrentsRelation.Value);
+
+            model.SetCharasteristic(charasteristic);
+            model.HasResult = true;
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Serial() {
+            var model = new SerialEngineModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Serial(SerialEngineModel model) {
+            if (!ModelState.IsValid) {
+                model.HasResult = false;
+                return View(model);
+            }
+
+            var charasteristic = SerialEngine.GetCharasteristic(
+                model.NominalPower.Value,
+                model.NominalVoltage.Value,
+                model.Frequency.Value,
+                model.AnchorPower.Value,
+                model.WindPower.Value,
+                model.MomentPower.Value);
+
+            model.SetCharasteristic(charasteristic);
+            model.HasResult = true;
+            return View(model);
         }
     }
 }

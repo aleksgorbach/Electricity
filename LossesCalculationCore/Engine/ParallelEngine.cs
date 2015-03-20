@@ -8,6 +8,7 @@
             public double AnchorCurrent { get; private set; }
             public double ChainResistance { get; private set; }
             public double AnchorResistance { get; private set; }
+            public double StartingAnchorCurrent { get; private set; }
             public double ReostatResistance { get; private set; }
 
             public Charasteristic(
@@ -18,6 +19,7 @@
                 double anchCurrent,
                 double chainRes,
                 double anchRes,
+                double startCurrent,
                 double reostRes) {
                 NominalMoment = nomMoment;
                 ConsumedPower = consPower;
@@ -26,6 +28,7 @@
                 AnchorCurrent = anchCurrent;
                 ChainResistance = chainRes;
                 AnchorResistance = anchRes;
+                StartingAnchorCurrent = startCurrent;
                 ReostatResistance = reostRes;
             }
         }
@@ -39,14 +42,15 @@
             double anchorPower,
             double currentsRelation = 2.5) {
             var nomMoment = 9550 * nomPower / rotFrequency;
-            var consPower = nomPower / efficiency;
-            var consCurrent = consPower / nomVoltage;
-            var windCurrent = excPercent * consCurrent;
+            var consPower = nomPower / efficiency * 100;
+            var consCurrent = consPower * 1000 / nomVoltage;
+            var windCurrent = excPercent * consCurrent / 100;
             var anchorCurrent = consCurrent - windCurrent;
             var chainRes = nomVoltage / windCurrent;
             var anchRes = anchorPower / (anchorCurrent * anchorCurrent);
-            var reostRes = nomPower / (currentsRelation * anchorCurrent) - anchRes;
-            return new Charasteristic(nomMoment, consPower, consCurrent, windCurrent, anchorCurrent, chainRes, anchRes, reostRes);
+            var startCur = currentsRelation * consCurrent - windCurrent;
+            var reostRes = (nomVoltage - startCur * anchRes) / startCur;
+            return new Charasteristic(nomMoment, consPower, consCurrent, windCurrent, anchorCurrent, chainRes, anchRes, startCur, reostRes);
         }
     }
 }

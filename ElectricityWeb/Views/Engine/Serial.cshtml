@@ -1,0 +1,114 @@
+﻿@model ElectricityWeb.Models.Engine.SerialEngineModel
+
+@{
+    ViewBag.Title = "Двигатель постоянного возбуждения";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="page-logo">
+    <img src="~/Content/Images/engine.png" class="visualizing" />
+</section>
+<section class="calcs">
+    @if (!string.IsNullOrEmpty(ViewBag.Error)) {
+        <div class="error">@ViewBag.Error</div>
+    }
+    @using (Html.BeginForm("Serial", "Engine", FormMethod.Post, new { @class = "input-form" })) {
+        <fieldset>
+            <div class="form-group">
+                @Html.LabelFor(x => Model.NominalPower, new { @class = "control-label" })
+                <div class="input-group">
+                    @Html.TextBoxFor(x => Model.NominalPower, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.NominalPowerUnits</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => Model.NominalVoltage)
+                <div class="input-group">
+                    @Html.TextBoxFor(x => Model.NominalVoltage, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.NominalVoltageUnits</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => Model.Frequency)
+                <div class="input-group">
+                    @Html.TextBoxFor(x => Model.Frequency, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.FrequencyUnits</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => Model.AnchorPower)
+                <div class="input-group">
+                    @Html.TextBoxFor(x => Model.AnchorPower, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.AnchorPowerUnits</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => Model.WindPower)
+                <div class="input-group">
+                    @Html.TextBoxFor(x => Model.WindPower, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.WindPowerUnits</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => Model.MomentPower)
+                <div class="input-group">
+                    @Html.TextBoxFor(x => Model.MomentPower, new { @class = "form-control" })
+                    <span class="input-group-addon">@Model.MomentPowerUnits</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Рассчитать" class="btn btn-primary" />
+            </div>
+        </fieldset>
+    }
+</section>
+<section class="results">
+    @if (Model.HasResult) {
+        <div class="form-group">
+            @Html.LabelFor(x => Model.SummaryPower, new { @class = "control-label" })
+            <div class="input-group">
+                @Html.DisplayFor(x => Model.SummaryPower, new { @class = "form-control" })
+                @Model.SummaryPowerUnits
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.NominalCurrent, new { @class = "control-label" })
+            <div class="input-group">
+                @Html.DisplayFor(x => Model.NominalCurrent, new { @class = "form-control" })
+                @Model.NominalCurrentUnits
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.NominalMoment, new { @class = "control-label" })
+            <div class="input-group">
+                @Html.DisplayFor(x => Model.NominalMoment, new { @class = "form-control" })
+                @Model.NominalMomentUnits
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.AnchorResistance, new { @class = "control-label" })
+            <div class="input-group">
+                @Html.DisplayFor(x => Model.AnchorResistance, new { @class = "form-control" })
+                @Model.AnchorResistanceUnits
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => Model.WindingResistance, new { @class = "control-label" })
+            <div class="input-group">
+                @Html.DisplayFor(x => Model.WindingResistance, new { @class = "form-control" })
+                @Model.WindingResistanceUnits
+            </div>
+        </div>
+    }
+</section>
+

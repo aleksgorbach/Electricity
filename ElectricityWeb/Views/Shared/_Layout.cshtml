@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="~/Content/site.css" />
     <link rel="stylesheet" href="~/Content/menu.css"/>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/chart/Chart.min.js"></script>
 </head>
 <body>
     <header>
@@ -25,8 +28,8 @@
                     <a href="#">Двигатели</a>
                     <ul>
                         <li><a href="@Url.Action("Async", "Engine")">Асинхронный двигатель</a></li>
-                        <li><a href="">Двигатель параллельного возбуждения</a></li>
-                        <li><a href="">Двигатель последовательного возбуждения</a></li>
+                        <li><a href="@Url.Action("Parallel", "Engine")">Двигатель параллельного возбуждения</a></li>
+                        <li><a href="@Url.Action("Serial", "Engine")">Двигатель последовательного возбуждения</a></li>
                     </ul>
                 </li>
                 <li><a href="#">О сайте</a></li>
@@ -38,8 +41,7 @@
     </main>
     <footer></footer>
 
-    <script src="http://code.jquery.com/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
     <script src="~/Scripts/menu.js"></script>
 </body>
 </html>

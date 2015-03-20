@@ -6,8 +6,8 @@ using ElectricityWeb.Attributes;
 
 using LossesCalculationCore.Engine;
 
-namespace ElectricityWeb.Models.Engines {
-    public class AsyncEngineModel {
+namespace ElectricityWeb.Models.Engine {
+    public class AsyncEngineModel : ResultModel {
 
         public AsyncEngineModel() {
             CharasteristicTable = new List<CharasteristicItemModel>();
@@ -17,8 +17,9 @@ namespace ElectricityWeb.Models.Engines {
 
         [Display(Name = "Номинальная мощность")]
         [Required]
+        [NonZero]
         [IsNumeric(IsNumericAttribute.NumberType.Floating, ErrorMessage = "Неверный формат")]
-        public double NominalPower { get; set; }
+        public double? NominalPower { get; set; }
         public string NominalPowerUnits {
             get {
                 return "кВт";
@@ -27,8 +28,9 @@ namespace ElectricityWeb.Models.Engines {
 
         [Display(Name = "Номинальное напряжение")]
         [Required]
+        [NonZero]
         [IsNumeric(IsNumericAttribute.NumberType.Floating, ErrorMessage = "Неверный формат")]
-        public double NominalVoltage { get; set; }
+        public double? NominalVoltage { get; set; }
         public string NominalVoltageUnits {
             get {
                 return "В";
@@ -37,8 +39,9 @@ namespace ElectricityWeb.Models.Engines {
 
         [Display(Name = "Частота вращения")]
         [Required]
+        [NonZero]
         [IsNumeric(ErrorMessage = "Неверный формат")]
-        public int Frequency { get; set; }
+        public int? Frequency { get; set; }
         public string FrequencyUnits {
             get {
                 return "об/мин";
@@ -47,8 +50,9 @@ namespace ElectricityWeb.Models.Engines {
 
         [Display(Name = "Коэффициент использования")]
         [Required]
+        [NonZero]
         [IsNumeric(IsNumericAttribute.NumberType.Floating, ErrorMessage = "Неверный формат")]
-        public double UsingCoefficient { get; set; }
+        public double? UsingCoefficient { get; set; }
         public string UsingCoefficientUnits {
             get {
                 return "%";
@@ -57,8 +61,9 @@ namespace ElectricityWeb.Models.Engines {
 
         [Display(Name = "Косинус угла")]
         [Required]
+        [NonZero]
         [IsNumeric(IsNumericAttribute.NumberType.Floating, ErrorMessage = "Неверный формат")]
-        public double Cosinus { get; set; }
+        public double? Cosinus { get; set; }
         public string CosinusUnits {
             get {
                 return "";
@@ -67,8 +72,9 @@ namespace ElectricityWeb.Models.Engines {
 
         [Display(Name = "Отношение пускового тока к номинальному")]
         [Required]
+        [NonZero]
         [IsNumeric(IsNumericAttribute.NumberType.Floating, ErrorMessage = "Неверный формат")]
-        public double CurrentsRelation { get; set; }
+        public double? CurrentsRelation { get; set; }
         public string CurrentsRelationUnits {
             get {
                 return "";
@@ -77,8 +83,9 @@ namespace ElectricityWeb.Models.Engines {
 
         [Display(Name = "Отношение максимального момента к номинальному")]
         [Required]
+        [NonZero]
         [IsNumeric(IsNumericAttribute.NumberType.Floating, ErrorMessage = "Неверный формат")]
-        public double MomentsRelation { get; set; }
+        public double? MomentsRelation { get; set; }
         public string MomentsRelationUnits {
             get {
                 return "";
@@ -159,8 +166,6 @@ namespace ElectricityWeb.Models.Engines {
         public List<CharasteristicItemModel> CharasteristicTable; 
 
         #endregion
-
-        public bool HasResult { get; set; }
 
         public void SetCharacteristic(AsyncEngine.Charasteristic charasteristic) {
             ActivePower = charasteristic.ActivePower;
