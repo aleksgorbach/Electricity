@@ -122,12 +122,14 @@
     <Compile Include="Attributes\NonZeroAttribute.cs" />
     <Compile Include="Controllers\EngineController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LineController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Engine\AsyncEngineModel.cs" />
     <Compile Include="Models\Engine\ParallelEngineModel.cs" />
     <Compile Include="Models\Engine\SerialEngineModel.cs" />
+    <Compile Include="Models\Lines\LineViewModel.cs" />
     <Compile Include="Models\Losses\TransformatorLossModel.cs" />
     <Compile Include="Models\Losses\TransmissionLossModel.cs" />
     <Compile Include="Models\ResultModel.cs" />
@@ -223,6 +225,7 @@
     <Content Include="Views\Engine\AsyncChart.cshtml" />
     <None Include="Views\Engine\Parallel.cshtml" />
     <Content Include="Views\Engine\Serial.cshtml" />
+    <Content Include="Views\Line\Choose.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

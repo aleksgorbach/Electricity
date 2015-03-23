@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectricityTests", "Electri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectricityWeb", "ElectricityWeb\ElectricityWeb.csproj", "{0B93E8B1-AE60-4ECD-8BBD-4EC86371BFC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{D728A864-7EE2-4DB3-9D71-D17EECE52F8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{0B93E8B1-AE60-4ECD-8BBD-4EC86371BFC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B93E8B1-AE60-4ECD-8BBD-4EC86371BFC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B93E8B1-AE60-4ECD-8BBD-4EC86371BFC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D728A864-7EE2-4DB3-9D71-D17EECE52F8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D728A864-7EE2-4DB3-9D71-D17EECE52F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D728A864-7EE2-4DB3-9D71-D17EECE52F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D728A864-7EE2-4DB3-9D71-D17EECE52F8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

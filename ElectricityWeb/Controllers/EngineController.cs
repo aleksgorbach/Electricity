@@ -49,7 +49,7 @@ namespace ElectricityWeb.Controllers {
 
 
             var chart = new Highcharts("chart");
-            chart.InitChart(new Chart { DefaultSeriesType = ChartTypes.Line });
+            chart.InitChart(new Chart { DefaultSeriesType = ChartTypes.Bar });
             chart.SetXAxis(new XAxis { Categories = xAxis });
             chart.SetSeries(new[] { new Series { Data = new Data(yAxis) } });
             return PartialView(chart);
