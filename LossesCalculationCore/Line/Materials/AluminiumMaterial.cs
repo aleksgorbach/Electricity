@@ -1,4 +1,6 @@
-﻿namespace LossesCalculationCore.Line.Materials {
+﻿using DataAccessLayer.POCO.Lines;
+
+namespace LossesCalculationCore.Line.Materials {
     public class AluminiumMaterial : Material {
         public override LineMaterial Type {
             get {

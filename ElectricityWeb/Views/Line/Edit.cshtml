@@ -1,0 +1,42 @@
+﻿@using DataAccessLayer.POCO.Lines
+@model DataAccessLayer.POCO.Lines.Line
+
+@{
+    ViewBag.Title = "Редактирование марок проводов";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "Line", FormMethod.Post, new { @class = "input-form" })) {
+    <fieldset>
+        <div class="form-group">
+            @Html.Label("Тип", new { @class = "control-label" })
+            <div class="input-group">
+                @Html.DropDownListFor(x => Model.Type, new SelectList(Enum.GetNames(typeof(LineType)), Model.Type), new { @class = "form-control" })
+                <span class="input-group-addon"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Материал", new { @class = "control-label" })
+            <div class="input-group">
+                @Html.DropDownListFor(x => Model.Material, new SelectList(Enum.GetNames(typeof(LineMaterial)), Model.Material), new { @class = "form-control" })
+                <span class="input-group-addon"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Площадь сечения", new { @class = "control-label" })
+            <div class="input-group">
+                @Html.TextBoxFor(x => Model.Square, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Добавить" class="btn btn-primary" />
+        </div>
+    </fieldset>
+}
+
+<div>
+    @Html.Action("LinesTable")
+</div>

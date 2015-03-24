@@ -1,0 +1,11 @@
+﻿@model System.Collections.Generic.IEnumerable<DataAccessLayer.POCO.Lines.Line>
+
+<table width="500">
+    @foreach (var item in Model) {
+        <tr>
+            <td width="30%">@item.Type</td>
+            <td width="30%">@item.Material</td>
+            <td>@item.Square</td>
+        </tr>
+    }
+</table>

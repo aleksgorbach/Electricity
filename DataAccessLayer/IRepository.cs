@@ -1,4 +1,0 @@
-﻿namespace DataAccessLayer {
-    interface IRepository {
-    }
-}

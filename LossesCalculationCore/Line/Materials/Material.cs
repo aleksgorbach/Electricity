@@ -1,9 +1,7 @@
-﻿namespace LossesCalculationCore.Line.Materials {
+﻿using DataAccessLayer.POCO.Lines;
+
+namespace LossesCalculationCore.Line.Materials {
     public abstract class Material {
-        public enum LineMaterial {
-            Copper,
-            Aluminium
-        }
 
         public abstract LineMaterial Type { get; }
         public abstract double Density { get; }

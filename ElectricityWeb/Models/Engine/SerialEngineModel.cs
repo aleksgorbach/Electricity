@@ -78,6 +78,7 @@ namespace ElectricityWeb.Models.Engine {
 
         #region Выходные данные
         [Display(Name = "Подводимая мощность двигателя")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double SummaryPower { get; set; }
         public string SummaryPowerUnits {
             get {
@@ -86,6 +87,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Номинальный ток")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double NominalCurrent { get; set; }
         public string NominalCurrentUnits {
             get {
@@ -94,6 +96,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Номинальный момент двигателя")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double NominalMoment { get; set; }
         public string NominalMomentUnits {
             get {
@@ -102,6 +105,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Сопротивление обмотки якоря")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double AnchorResistance { get; set; }
         public string AnchorResistanceUnits {
             get {
@@ -110,6 +114,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Сопротивление обмотки возбуждения")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double WindingResistance { get; set; }
         public string WindingResistanceUnits {
             get {

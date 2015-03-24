@@ -1,17 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using LossesCalculationCore.Line.Lines;
+using DataAccessLayer.POCO.Lines;
+
 using LossesCalculationCore.Line.Materials;
+
+using Line = LossesCalculationCore.Line.Lines.Line;
 
 namespace ElectricityWeb.Models.Lines {
     public class LineViewModel : ResultModel {
         [Required]
         [Display(Name = "Тип линии")]
-        public Line.LineType Type { get; set; }
+        public LineType Type { get; set; }
 
         [Required]
         [Display(Name = "Материал")]
-        public Material.LineMaterial Material { get; set; }
+        public LineMaterial Material { get; set; }
 
         [Required]
         [Display(Name = "Активная мощность")]
@@ -54,7 +57,8 @@ namespace ElectricityWeb.Models.Lines {
             }
         }
 
-        [Display(Name = "Площадь сечения")]
+        [Display(Name = "Рассчитанная площадь сечения")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double Square { get; set; }
         public string SquareUnits {
             get {
@@ -62,12 +66,17 @@ namespace ElectricityWeb.Models.Lines {
             }
         }
 
-        [Display(Name = "Марка провода")]
+        [Display(Name = "Подходящее сечение провода")]
         public string Description { get; set; }
+        public string DescriptionUnits {
+            get {
+                return "мм2";
+            }
+        }
 
         public LineViewModel() {
-            Type = Line.LineType.Air;
-            Material = LossesCalculationCore.Line.Materials.Material.LineMaterial.Copper;
+            Type = LineType.Air;
+            Material = LineMaterial.Copper;
             Cos = 1;
             Voltage = 380;
             DeltaVoltage = 5;

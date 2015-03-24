@@ -1,5 +1,4 @@
-﻿@using LossesCalculationCore.Line.Lines
-@using LossesCalculationCore.Line.Materials
+﻿@using DataAccessLayer.POCO.Lines
 @model ElectricityWeb.Models.Lines.LineViewModel
 
 @{
@@ -19,7 +18,7 @@
             <div class="form-group">
                 @Html.LabelFor(x => Model.Type, new { @class = "control-label" })
                 <div class="input-group">
-                    @Html.DropDownListFor(x => Model.Type, new SelectList(Enum.GetNames(typeof(Line.LineType)), Model.Type), new { @class = "form-control" })
+                    @Html.DropDownListFor(x => Model.Type, new SelectList(Enum.GetNames(typeof(LineType)), Model.Type), new { @class = "form-control" })
                     <span class="input-group-addon"></span>
                 </div>
             </div>
@@ -27,7 +26,7 @@
             <div class="form-group">
                 @Html.LabelFor(x => Model.Type, new { @class = "control-label" })
                 <div class="input-group">
-                    @Html.DropDownListFor(x => Model.Material, new SelectList(Enum.GetNames(typeof(Material.LineMaterial)), Model.Material), new { @class = "form-control" })
+                    @Html.DropDownListFor(x => Model.Material, new SelectList(Enum.GetNames(typeof(LineMaterial)), Model.Material), new { @class = "form-control" })
                     <span class="input-group-addon"></span>
                 </div>
             </div>
@@ -92,6 +91,7 @@
             @Html.LabelFor(x => Model.Description, new { @class = "control-label" })
             <div class="input-group">
                 @Html.DisplayFor(x => Model.Description, new { @class = "form-control" })
+                @Model.DescriptionUnits
             </div>
         </div>
     }

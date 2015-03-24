@@ -1,14 +1,13 @@
 ﻿using System;
+using System.Linq;
+
+using DataAccessLayer.POCO.Lines;
+using DataAccessLayer.Service;
 
 using LossesCalculationCore.Line.Materials;
 
 namespace LossesCalculationCore.Line.Lines {
     public abstract class Line {
-        public enum LineType {
-            Air,
-            AirCable,
-            GroundCable
-        }
 
         public abstract LineType Type { get; }
         public Material Material { get; private set; }
@@ -26,10 +25,11 @@ namespace LossesCalculationCore.Line.Lines {
             var q = power * Math.Tan(Math.Acos(cos));
             Square = (1000 * power * Material.Density)
                      / ((deltaVoltage * voltage * voltage) / (Length * 100000) - q * X0);
-            // TODO: выбрать из таблицы нужный тип провода и заполнить поле Description, исходя из него
+            var lineType = RepositoryService.LineRepository.All().Where(x =>x.Square > Square&& (x.Type == LineType.GroundCable || x.Type == LineType.AirCable || (x.Type == LineType.Air && x.Material == Material.Type))).Min(x => x.Square);
+            Description = lineType.ToString();
         }
 
-        public static Line Create(LineType type, Material.LineMaterial materialType, double length) {
+        private static Line Create(LineType type, LineMaterial materialType, double length) {
             var material = Material.Create(materialType);
             switch (type) {
                 case LineType.Air:
@@ -43,7 +43,7 @@ namespace LossesCalculationCore.Line.Lines {
 
         public static Line Choose(
             LineType type,
-            Material.LineMaterial materialType,
+            LineMaterial materialType,
             double power,
             double cos,
             double length,

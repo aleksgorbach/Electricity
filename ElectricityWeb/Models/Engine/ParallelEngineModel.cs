@@ -92,6 +92,7 @@ namespace ElectricityWeb.Models.Engine {
 
         #region Выходные данные
         [Display(Name = "Номинальный момент двигателя")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double NominalMoment { get; set; }
         public string NominalMomentUnits {
             get {
@@ -100,6 +101,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Подводимая мощность")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double ConsumedPower { get; set; }
         public string ConsumedPowerUnits {
             get {
@@ -108,6 +110,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Номинальный ток двигателя")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double ConsumedCurrent { get; set; }
         public string ConsumedCurrentUnits {
             get {
@@ -116,6 +119,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Ток возбуждения")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double WindingCurrent { get; set; }
         public string WindingCurrentUnits {
             get {
@@ -124,6 +128,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Ток якоря")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double AnchorCurrent { get; set; }
         public string AnchorCurrentUnits {
             get {
@@ -132,6 +137,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Сопротивление цепи возбуждения")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double ChainResistance { get; set; }
         public string ChainResistanceUnits {
             get {
@@ -140,6 +146,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Сопротивление якоря")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double AnchorResistance { get; set; }
         public string AnchorResistanceUnits {
             get {
@@ -148,6 +155,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Пусковой ток якоря")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double StartingAnchorCurrent { get; set; }
         public string StartingAnchorCurrentUnits {
             get {
@@ -156,6 +164,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Сопротивление реостата")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double ReostatResistance { get; set; }
         public string ReostatResistanceUnits {
             get {

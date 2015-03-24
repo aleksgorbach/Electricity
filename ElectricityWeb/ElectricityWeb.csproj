@@ -45,6 +45,10 @@
     <Reference Include="DotNet.Highcharts">
       <HintPath>..\packages\DotNet.Highcharts.4.0\lib\DotNet.Highcharts.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -206,6 +210,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+      <Project>{d728a864-7ee2-4db3-9d71-d17eece52f8e}</Project>
+      <Name>DataAccessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LossesCalculationCore\LossesCalculationCore.csproj">
       <Project>{e6ffdc72-72d5-4a19-a947-65c595531580}</Project>
       <Name>LossesCalculationCore</Name>
@@ -226,6 +234,8 @@
     <None Include="Views\Engine\Parallel.cshtml" />
     <Content Include="Views\Engine\Serial.cshtml" />
     <Content Include="Views\Line\Choose.cshtml" />
+    <Content Include="Views\Line\Edit.cshtml" />
+    <Content Include="Views\Line\LinesTable.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

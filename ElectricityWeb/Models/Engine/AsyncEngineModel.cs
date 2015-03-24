@@ -97,6 +97,7 @@ namespace ElectricityWeb.Models.Engine {
         #region Выходные данные
 
         [Display(Name = "Активная мощность")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double ActivePower { get; set; }
         public string ActivePowerUnits {
             get {
@@ -105,6 +106,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Номинальный момент")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double NominalMoment { get; set; }
         public string NominalMomentUnits {
             get {
@@ -113,6 +115,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Критический момент")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double CriticalMoment { get; set; }
         public string CriticalMomentUnits {
             get {
@@ -121,6 +124,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Номинальный ток")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double NominalCurrent { get; set; }
         public string NominalCurrentUnits {
             get {
@@ -129,6 +133,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Пусковой ток")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double StartingCurrent { get; set; }
         public string StartingCurrentUnits {
             get {
@@ -145,6 +150,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Номинальное скольжение")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double NominalSlip { get; set; }
         public string NominalSlipUnits {
             get {
@@ -153,6 +159,7 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Критическое скольжение")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double CriticalSlip { get; set; }
         public string CriticalSlipUnits {
             get {

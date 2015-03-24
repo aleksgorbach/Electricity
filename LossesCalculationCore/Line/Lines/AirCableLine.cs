@@ -1,4 +1,6 @@
-﻿using LossesCalculationCore.Line.Materials;
+﻿using DataAccessLayer.POCO.Lines;
+
+using LossesCalculationCore.Line.Materials;
 
 namespace LossesCalculationCore.Line.Lines {
     public class AirCableLine : CableLine {

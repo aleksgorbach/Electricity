@@ -1,4 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+
+using DataAccessLayer.Service;
 
 using ElectricityWeb.Models.Lines;
 
@@ -32,6 +36,23 @@ namespace ElectricityWeb.Controllers {
             model.Initialize(line);
             model.HasResult = true;
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Edit() {
+            return View(new DataAccessLayer.POCO.Lines.Line());
+        }
+
+        [HttpPost]
+        public ActionResult Edit(DataAccessLayer.POCO.Lines.Line model) {
+            RepositoryService.LineRepository.Add(model);
+            model.Square = 0;
+            return View(model);
+        }
+
+        public ActionResult LinesTable() {
+            var model = RepositoryService.LineRepository.All().OrderBy(x => x.Type).ThenBy(x => x.Square);
+            return PartialView(model);
         }
     }
 }

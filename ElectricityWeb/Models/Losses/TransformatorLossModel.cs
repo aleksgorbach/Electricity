@@ -101,6 +101,7 @@ namespace ElectricityWeb.Models.Losses {
         }
 
         [Display(Name = "Потери")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double Loss { get; set; }
         public string LossUnits {
             get {
