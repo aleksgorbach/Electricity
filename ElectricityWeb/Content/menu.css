@@ -21,7 +21,7 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #b1c3cd;
+    background: #EF525B;
     box-shadow: 0 3px 10px -2px rgba(0,0,0,.1);
     border: 1px solid rgba(0,0,0,.1);
 }
@@ -42,7 +42,7 @@ nav {
         }
 
             nav ul li:hover {
-                background: #618091;
+                background: #DA2536;
                 background: rgba(3, 16, 28, 0.15);
             }
 
@@ -69,7 +69,7 @@ nav {
 
         nav ul ul {
             display: none;
-            background: #b1c3cd;
+            background: #EF525B;
             position: absolute;
             top: 100%;
             box-shadow: -3px 3px 10px -2px rgba(0,0,0,.1);

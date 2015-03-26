@@ -144,10 +144,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\Images\engine.png" />
+    <Content Include="Content\Images\engine2.png" />
     <Content Include="Content\Images\transformator.png" />
+    <Content Include="Content\Images\transformator2.png" />
     <Content Include="Content\Images\transmission.png" />
     <Content Include="Content\site.css" />
     <Content Include="Content\menu.css" />
+    <Content Include="Content\Images\transmission2.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Fonts\CaviarDreams.ttf" />
     <Content Include="Content\Images\bg.png" />
