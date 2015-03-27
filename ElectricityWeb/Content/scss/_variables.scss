@@ -1,0 +1,20 @@
+﻿@import url(http://fonts.googleapis.com/css?family=Scada&subset=latin,cyrillic);
+@import url(http://fonts.googleapis.com/css?family=Lato);
+@import url(http://fonts.googleapis.com/css?family=Philosopher&subset=cyrillic);
+
+// Colors
+$background-color: #EAE7D6;
+$menu-background-color: #EF525B;
+$input-error-background: #f7adad;
+$error-text-color: #a12525;
+$body-text-color: #222;
+$menu-item-hover-color: #DA2536;
+$menu-item-color: $menu-background-color;
+$menu-link-color: $body-text-color;
+$menu-link-hover-color: $menu-link-color / 1.5;
+$header-background: #24C2CB;
+
+// Fonts
+$body-font: 'Scada', sans-serif;
+$menu-font: 'Lato', sans-serif;
+$header-font: 'Philosopher', sans-serif;

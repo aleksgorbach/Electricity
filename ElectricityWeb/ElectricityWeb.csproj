@@ -145,18 +145,18 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\Images\engine.png" />
     <Content Include="Content\Images\engine2.png" />
+    <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\transformator.png" />
     <Content Include="Content\Images\transformator2.png" />
     <Content Include="Content\Images\transmission.png" />
     <Content Include="Content\site.css" />
     <Content Include="Content\menu.css" />
     <Content Include="Content\Images\transmission2.png" />
+    <Content Include="Content\skeleton\normalize.css" />
+    <Content Include="Content\skeleton\skeleton.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Fonts\CaviarDreams.ttf" />
     <Content Include="Content\Images\bg.png" />
-    <Content Include="Scripts\chart\Chart.js" />
-    <Content Include="Scripts\chart\Chart.min.js" />
-    <Content Include="Scripts\data\asyncChart.js" />
     <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.js" />
     <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.src.js" />
     <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-3d.js" />
@@ -190,6 +190,7 @@
     <Content Include="Scripts\Highcharts-4.0.1\js\themes\grid.js" />
     <Content Include="Scripts\Highcharts-4.0.1\js\themes\sand-signika.js" />
     <Content Include="Scripts\Highcharts-4.0.1\js\themes\skies.js" />
+    <Content Include="Scripts\logic.js" />
     <Content Include="Scripts\menu.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -232,8 +233,12 @@
     <Content Include="Views\Engine\Async.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\scss\site.scss" />
+    <Content Include="Content\scss\menu.scss" />
+    <Content Include="Content\scss\_variables.scss" />
     <None Include="Properties\PublishProfiles\MyAsp.net.pubxml" />
     <Content Include="Views\Engine\AsyncChart.cshtml" />
+    <Content Include="Scripts\coffee\logic.coffee" />
     <None Include="Views\Engine\Parallel.cshtml" />
     <Content Include="Views\Engine\Serial.cshtml" />
     <Content Include="Views\Line\Choose.cshtml" />

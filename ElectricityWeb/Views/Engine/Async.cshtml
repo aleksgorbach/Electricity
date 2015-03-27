@@ -7,10 +7,10 @@
 
 <script src="~/Scripts/Highcharts-4.0.1/js/highcharts.js"></script>
 
-<section class="page-logo">
+<section class="three columns">
     <img src="~/Content/Images/engine.png" class="visualizing"/>
 </section>
-<section class="calcs">
+<section class="four columns">
     @if (!string.IsNullOrEmpty(ViewBag.Error)) {
         <div class="error">@ViewBag.Error</div>
     }
@@ -78,7 +78,7 @@
         </fieldset>
     }
 </section>
-<section class="results">
+<section class="five columns">
     @if (Model.HasResult) {
         <div class="form-group">
             @Html.LabelFor(x => Model.ActivePower, new { @class = "control-label" })

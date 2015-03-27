@@ -2,52 +2,75 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>@ViewBag.Title</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="~/Content/site.css" />
-    <link rel="stylesheet" href="~/Content/menu.css"/>
+    <!--jQuery
+    ------------------------------------------------>
     <script src="http://code.jquery.com/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="~/Scripts/chart/Chart.min.js"></script>
+
+    <!--Favicon
+    ------------------------------------------------>
+    <link rel="icon" type="image/png" href="~/Content/Images/favicon.png" />
+
+    <!-- Skeleton styles
+    ------------------------------------------------>
+    <link href="~/Content/skeleton/normalize.css" rel="stylesheet" />
+    <link href="~/Content/skeleton/skeleton.css" rel="stylesheet" />
+
+    <!--Bootstrap
+    ------------------------------------------------>
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>*@
+
+    <!-- Custom styles
+    ------------------------------------------------>
+    <link rel="stylesheet" href="~/Content/site.css" />
+    <link rel="stylesheet" href="~/Content/menu.css" />
+
 </head>
-<body>
+<body class="container">
     <header>
-        <nav role="navigation">
-            <ul>
-                <li><a href="@Url.Action("Index", "Home")">Главная</a></li>
-                <li>
-                    <a href="#">Потери</a>
-                    <ul>
-                        <li><a href="@Url.Action("TransformatorLoss", "Home")">Потери в трансформаторе</a></li>
-                        <li><a href="@Url.Action("TransmissionLoss", "Home")">Потери в линиях передач</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Двигатели</a>
-                    <ul>
-                        <li><a href="@Url.Action("Async", "Engine")">Асинхронный двигатель</a></li>
-                        <li><a href="@Url.Action("Parallel", "Engine")">Двигатель параллельного возбуждения</a></li>
-                        <li><a href="@Url.Action("Serial", "Engine")">Двигатель последовательного возбуждения</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Линии</a>
-                    <ul>
-                        <li><a href="@Url.Action("Choose", "Line")">Расчет сечения провода</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">О сайте</a></li>
-            </ul>
-        </nav>
+        <h1>Расчет параметров энергоснабжения</h1>
     </header>
-    <main>
-        @RenderBody()
+    <main class="row">
+        <aside class="three columns">
+            <nav role="navigation">
+                <ul>
+                    <li><a href="@Url.Action("Index", "Home")">Главная</a></li>
+                    <li>
+                        <a href="#">Потери</a>
+                        <ul>
+                            <li><a href="@Url.Action("TransformatorLoss", "Home")">Потери в трансформаторе</a></li>
+                            <li><a href="@Url.Action("TransmissionLoss", "Home")">Потери в линиях передач</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Двигатели</a>
+                        <ul>
+                            <li><a href="@Url.Action("Async", "Engine")">Асинхронный двигатель</a></li>
+                            <li><a href="@Url.Action("Parallel", "Engine")">Двигатель параллельного возбуждения</a></li>
+                            <li><a href="@Url.Action("Serial", "Engine")">Двигатель последовательного возбуждения</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Линии</a>
+                        <ul>
+                            <li><a href="@Url.Action("Choose", "Line")">Расчет сечения провода</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">О сайте</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <section class="nine columns">
+            @RenderBody()
+        </section>
     </main>
     <footer></footer>
 
-    
     <script src="~/Scripts/menu.js"></script>
 </body>
 </html>

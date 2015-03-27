@@ -1,0 +1,66 @@
+﻿@import "variables.scss";
+
+body {
+    background-color: $background-color;
+}
+
+@media screen and (max-width: 1024px) {
+    .page-logo {
+        display: none !important;
+    }
+}
+
+.input-group {
+    width: 80%;
+}
+
+.input-group-addon {
+    width: 30%;
+}
+
+.input-validation-error {
+    background-color: $input-error-background;
+    font-weight: bold;
+}
+
+.error {
+    color: $error-text-color;
+}
+
+.page-logo {
+    float: left;
+    width: 20%;
+}
+
+img.visualizing {
+    width: 200px;
+    height: 200px;
+}
+
+.calcs {
+    float: left;
+    width: 40%;
+}
+
+.results {
+    float: right;
+    width: 40%;
+}
+
+main {
+    font-family: $body-font;
+    color: $body-text-color;
+}
+
+header {
+    background-color: $header-background;
+    height: 100px;
+
+    h1 {
+        font-family: $header-font;
+    }
+}
+
+aside {
+    background-color: $menu-background-color;
+}
