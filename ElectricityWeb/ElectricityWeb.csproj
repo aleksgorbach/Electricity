@@ -190,10 +190,18 @@
     <Content Include="Scripts\Highcharts-4.0.1\js\themes\skies.js" />
     <Content Include="Scripts\logic.js" />
     <Content Include="Scripts\menu.js" />
-    <Content Include="Styles\css\menu.css" />
-    <Content Include="Styles\css\menu.min.css" />
-    <Content Include="Styles\css\site.css" />
-    <Content Include="Styles\css\site.min.css" />
+    <Content Include="Styles\scss\menu.css">
+      <DependentUpon>menu.scss</DependentUpon>
+    </Content>
+    <Content Include="Styles\scss\menu.min.css">
+      <DependentUpon>menu.css</DependentUpon>
+    </Content>
+    <Content Include="Styles\scss\site.css">
+      <DependentUpon>site.scss</DependentUpon>
+    </Content>
+    <Content Include="Styles\scss\site.min.css">
+      <DependentUpon>site.css</DependentUpon>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
