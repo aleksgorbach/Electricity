@@ -9,32 +9,29 @@ namespace ElectricityWeb.Models.Engine {
         #region Входные данные
         
         [Display(Name = "Номинальная мощность")]
-        [Required]
         [NonZero]
         [IsNumeric(IsNumericAttribute.NumberType.Floating, ErrorMessage = "Неверный формат")]
-        public double? NominalPower { get; set; }
+        public double NominalPower { get; set; }
         public string NominalPowerUnits {
             get {
-                return "Вт";
+                return "Ватт";
             }
         }
 
         [Display(Name = "Номинальное напряжение")]
-        [Required]
         [NonZero]
         [IsNumeric(IsNumericAttribute.NumberType.Floating, ErrorMessage = "Неверный формат")]
-        public double? NominalVoltage { get; set; }
+        public double NominalVoltage { get; set; }
         public string NominalVoltageUnits {
             get {
-                return "В";
+                return "Вольт";
             }
         }
 
         [Display(Name = "Частота вращения якоря")]
-        [Required]
         [NonZero]
         [IsNumeric(ErrorMessage = "Неверный формат")]
-        public int? Frequency { get; set; }
+        public int Frequency { get; set; }
         public string FrequencyUnits {
             get {
                 return "об/мин";
@@ -42,10 +39,9 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Мощность якоря")]
-        [Required]
         [NonZero]
         [IsNumeric(IsNumericAttribute.NumberType.Floating, ErrorMessage = "Неверный формат")]
-        public double? AnchorPower { get; set; }
+        public double AnchorPower { get; set; }
         public string AnchorPowerUnits {
             get {
                 return "Вт";
@@ -53,10 +49,9 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Мощность тока возбуждения")]
-        [Required]
         [NonZero]
         [IsNumeric(IsNumericAttribute.NumberType.Floating, ErrorMessage = "Неверный формат")]
-        public double? WindPower { get; set; }
+        public double WindPower { get; set; }
         public string WindPowerUnits {
             get {
                 return "Вт";
@@ -64,10 +59,9 @@ namespace ElectricityWeb.Models.Engine {
         }
 
         [Display(Name = "Мощность момента двигателя")]
-        [Required]
         [NonZero]
         [IsNumeric(IsNumericAttribute.NumberType.Floating, ErrorMessage = "Неверный формат")]
-        public double? MomentPower { get; set; }
+        public double MomentPower { get; set; }
         public string MomentPowerUnits {
             get {
                 return "Вт";

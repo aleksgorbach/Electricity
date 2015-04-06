@@ -1,0 +1,28 @@
+﻿@import url(http://fonts.googleapis.com/css?family=Scada&subset=latin,cyrillic);
+@import url(http://fonts.googleapis.com/css?family=Lato);
+@import url(http://fonts.googleapis.com/css?family=Philosopher&subset=cyrillic);
+nav {
+  font-size: 28px;
+  font-family: 'Philosopher', sans-serif;
+  font-weight: 700;
+  color: #74042A; }
+  nav .indented {
+    margin-left: 20px;
+    margin-right: 10px; }
+  nav ul {
+    list-style: none;
+    margin: 0; }
+    nav ul li ul li {
+      font-size: 18px; }
+  nav a {
+    text-decoration: none;
+    color: #74042A; }
+    nav a:hover {
+      color: #8b0532; }
+  nav .menu-item:hover {
+    background-color: #be3164; }
+
+aside {
+  background-color: #D3366F;
+  height: 100%;
+  width: 300px; }

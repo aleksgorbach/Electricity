@@ -1,12 +1,12 @@
-@import url(http://fonts.googleapis.com/css?family=Scada&subset=latin,cyrillic);
+﻿@import url(http://fonts.googleapis.com/css?family=Scada&subset=latin,cyrillic);
 @import url(http://fonts.googleapis.com/css?family=Lato);
 @import url(http://fonts.googleapis.com/css?family=Philosopher&subset=cyrillic);
-body {
-  background-color: #EAE7D6; }
+html, body {
+  height: 100%; }
 
-@media screen and (max-width: 1024px) {
-  .page-logo {
-    display: none !important; } }
+body {
+  background-color: #0C1127; }
+
 .input-group {
   width: 80%; }
 
@@ -37,16 +37,19 @@ img.visualizing {
   width: 40%; }
 
 main {
-  font-family: "Scada", sans-serif;
-  color: #222; }
+  font-family: 'Scada', sans-serif;
+  color: #CFB3C8; }
 
-header {
-  background-color: #24C2CB;
-  height: 100px; }
-  header h1 {
-    font-family: "Philosopher", sans-serif; }
+.container {
+  width: 100%;
+  height: 100%; }
 
-aside {
-  background-color: #EF525B; }
+.row {
+  height: 100%; }
 
-/*# sourceMappingURL=site.css.map */
+input[type="text"] {
+  background-color: #0C1127;
+  border: 1px solid #fff; }
+  input[type="text"]:focus {
+    border: 2px solid #fff;
+    font-weight: 700; }

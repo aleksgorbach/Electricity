@@ -1,0 +1,42 @@
+﻿@import "variables.scss";
+
+nav {
+    font-size: 28px;
+    font-family: $menu-font;
+    font-weight: 700;
+    color: $menu-link-color;
+
+    .indented {
+        margin-left: 20px;
+        margin-right: 10px; 
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        li {
+            ul li {
+                font-size: 18px;    
+            }
+        }
+    } 
+    
+    a {
+        text-decoration: none;
+        color: $menu-link-color;
+        &:hover {
+            color: $menu-link-hover-color;
+        }
+    }
+
+    .menu-item:hover {
+        background-color: $menu-hover-color;
+    }    
+}
+
+aside {
+    background-color: $menu-background-color;
+    height: 100%;
+    width: 300px;
+    
+}

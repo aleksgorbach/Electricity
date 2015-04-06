@@ -98,12 +98,12 @@ namespace ElectricityWeb.Controllers {
             }
 
             var charasteristic = SerialEngine.GetCharasteristic(
-                model.NominalPower.Value,
-                model.NominalVoltage.Value,
-                model.Frequency.Value,
-                model.AnchorPower.Value,
-                model.WindPower.Value,
-                model.MomentPower.Value);
+                model.NominalPower,
+                model.NominalVoltage,
+                model.Frequency,
+                model.AnchorPower,
+                model.WindPower,
+                model.MomentPower);
 
             model.SetCharasteristic(charasteristic);
             model.HasResult = true;

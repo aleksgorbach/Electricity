@@ -1,13 +1,11 @@
 ﻿@import "variables.scss";
 
-body {
-    background-color: $background-color;
+html, body {
+    height: 100%;
 }
 
-@media screen and (max-width: 1024px) {
-    .page-logo {
-        display: none !important;
-    }
+body {
+    background-color: $body-background-color;
 }
 
 .input-group {
@@ -52,15 +50,24 @@ main {
     color: $body-text-color;
 }
 
-header {
-    background-color: $header-background;
-    height: 100px;
-
-    h1 {
-        font-family: $header-font;
-    }
+.container {
+    width: 100%;
+    height: 100%;
 }
 
-aside {
-    background-color: $menu-background-color;
+.row {
+    height: 100%;
+}
+
+@mixin input-border($thickness){
+    border: $thickness solid $input-border-color;
+}
+
+input[type="text"] {
+    background-color: $input-background-color;
+    @include input-border(1px);
+    &:focus {
+        @include input-border(2px);
+        font-weight: 700;
+    }
 }

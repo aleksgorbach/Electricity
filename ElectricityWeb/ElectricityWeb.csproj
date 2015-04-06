@@ -149,8 +149,6 @@
     <Content Include="Content\Images\transformator.png" />
     <Content Include="Content\Images\transformator2.png" />
     <Content Include="Content\Images\transmission.png" />
-    <Content Include="Content\site.css" />
-    <Content Include="Content\menu.css" />
     <Content Include="Content\Images\transmission2.png" />
     <Content Include="Content\skeleton\normalize.css" />
     <Content Include="Content\skeleton\skeleton.css" />
@@ -192,6 +190,10 @@
     <Content Include="Scripts\Highcharts-4.0.1\js\themes\skies.js" />
     <Content Include="Scripts\logic.js" />
     <Content Include="Scripts\menu.js" />
+    <Content Include="Styles\css\menu.css" />
+    <Content Include="Styles\css\menu.min.css" />
+    <Content Include="Styles\css\site.css" />
+    <Content Include="Styles\css\site.min.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -233,9 +235,9 @@
     <Content Include="Views\Engine\Async.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\scss\site.scss" />
-    <Content Include="Content\scss\menu.scss" />
-    <Content Include="Content\scss\_variables.scss" />
+    <Content Include="Styles\scss\site.scss" />
+    <Content Include="Styles\scss\menu.scss" />
+    <Content Include="Styles\scss\_variables.scss" />
     <None Include="Properties\PublishProfiles\MyAsp.net.pubxml" />
     <Content Include="Views\Engine\AsyncChart.cshtml" />
     <Content Include="Scripts\coffee\logic.coffee" />
