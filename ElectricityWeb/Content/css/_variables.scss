@@ -1,0 +1,19 @@
+﻿// Colors
+$body-background-color: white;
+$body-text-color: black;
+
+$main-background-color: #ede7f6;
+
+$menu-background-color: #311b92;
+$menu-hover-color: lighten($menu-background-color, 10%);
+$menu-link-color: #F3843E;
+$menu-link-hover-color: $menu-link-color * 1.2;
+
+$input-error-background: #f7adad;
+$error-text-color: #a12525;
+
+$input-background-color: $body-background-color;
+$input-border-color: #fff;
+$input-text-color: #FF9900;
+
+$header-background-color: #24C2CB;

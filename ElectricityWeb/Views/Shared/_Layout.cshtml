@@ -2,72 +2,64 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>@ViewBag.Title</title>
 
-    <!--jQuery
+    <!-- jQuery
     ------------------------------------------------>
     <script src="http://code.jquery.com/jquery.min.js"></script>
 
-    <!-- Skeleton styles
+    <!-- Materialize
     ------------------------------------------------>
-    <link href="~/Content/skeleton/normalize.css" rel="stylesheet" />
-    <link href="~/Content/skeleton/skeleton.css" rel="stylesheet" />
+    <link href="~/Content/css/materialize.min.css" rel="stylesheet" media="screen,projection" />
+    <script src="~/Content/js/bin/materialize.min.js"></script>
 
-    <!--Bootstrap
-    ------------------------------------------------>
-    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>*@
 
     <!-- Custom styles
     ------------------------------------------------>
-    <link rel="stylesheet" href="~/Styles/scss/site.css" />
-    <link rel="stylesheet" href="~/Styles/scss/menu.css" />
+    <link rel="stylesheet" href="~/Content/css/site.min.css" />
+    <link rel="stylesheet" href="~/Content/css/menu.min.css" />
+    <script src="~/Content/js/site.js"></script>
 
 </head>
-<body class="container u-max-full-width">
-    <div class="row">
-        <aside class="three columns">
-            <nav role="navigation">
-                <ul>
-                    <li class="menu-item"><div class="indented"><a href="@Url.Action("Index", "Home")">Главная</a></div></li>
+<body class="container">
+    <header>
+        <h1>@ViewBag.Title</h1>
+        <ul id="losses_dropdown" class="dropdown-content">
+            <li><a href="@Url.Action("TransformatorLoss", "Home")">Потери в трансформаторе</a></li>
+            <li><a href="@Url.Action("TransmissionLoss", "Home")">Потери в линиях передач</a></li>
+        </ul>
+        <ul id="engines_dropdown" class="dropdown-content">
+            <li><a href="@Url.Action("Async", "Engine")">Асинхронный двигатель</a></li>
+            <li><a href="@Url.Action("Parallel", "Engine")">Двигатель параллельного возбуждения</a></li>
+            <li><a href="@Url.Action("Serial", "Engine")">Двигатель последовательного возбуждения</a></li>
+        </ul>
+        <ul id="lines_dropdown" class="dropdown-content">
+            <li>
+                <a href="@Url.Action("Choose", "Line")">Расчет сечения провода</a>
+            </li>
+        </ul>
+        <nav role="navigation">
+            <div class="nav-wrapper">
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="@Url.Action("Index", "Home")">Главная</a></li>
                     <li>
-                        <span class="indented">Потери</span>
-                        <ul>
-                            <li class="menu-item">
-                                <div class="indented"><a href="@Url.Action("TransformatorLoss", "Home")">Потери в трансформаторе</a></div>
-                            </li>
-                            <li class="menu-item"><div class="indented"><a href="@Url.Action("TransmissionLoss", "Home")">Потери в линиях передач</a></div></li>
-                        </ul>
+                        <a class="dropdown-button" data-activates="losses_dropdown" href="#">Потери<i class="mdi-navigation-arrow-drop-down right"></i></a>
                     </li>
                     <li>
-                        <span class="indented">Двигатели</span>
-                        <ul>
-                            <li class="menu-item"><div class="indented"><a href="@Url.Action("Async", "Engine")">Асинхронный двигатель</a></div></li>
-                            <li class="menu-item"><div class="indented"><a href="@Url.Action("Parallel", "Engine")">Двигатель параллельного возбуждения</a></div></li>
-                            <li class="menu-item"><div class="indented"><a href="@Url.Action("Serial", "Engine")">Двигатель последовательного возбуждения</a></div></li>
-                        </ul>
+                        <a class="dropdown-button" data-activates="engines_dropdown" href="#">Двигатели<i class="mdi-navigation-arrow-drop-down right"></i></a>
                     </li>
                     <li>
-                        <span class="indented">Линии</span>
-                        <ul>
-                            <li class="menu-item"><div class="indented"><a href="@Url.Action("Choose", "Line")">Расчет сечения провода</a></div></li>
-                        </ul>
+                        <a class="dropdown-button" data-activates="lines_dropdown" href="#">Линии<i class="mdi-navigation-arrow-drop-down right"></i></a>
                     </li>
-                    <li class="menu-item"><div class="indented"><a href="#">О сайте</a></div></li>
+                    <li><a href="#">О сайте</a></li>
                 </ul>
-            </nav>
-        </aside>
-        <main class="nine columns">
-            <header>
-                <h1>@ViewBag.Title</h1>
-            </header>
-            @RenderBody()
-        </main>
-    </div>
-
-    <script src="~/Scripts/menu.js"></script>
+            </div>
+        </nav>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
 </body>
 </html>

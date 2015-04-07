@@ -1,0 +1,32 @@
+﻿html, body {
+  height: 100%; }
+
+.input-group {
+  width: 80%; }
+
+.input-group-addon {
+  width: 30%; }
+
+.input-validation-error {
+  background-color: #f7adad;
+  font-weight: bold; }
+
+.error {
+  color: #a12525; }
+
+.page-logo {
+  float: left;
+  width: 20%; }
+
+img.visualizing {
+  width: 200px;
+  height: 200px; }
+
+input[type="text"] {
+  border: 1px solid #fff; }
+  input[type="text"]:focus {
+    border: 2px solid #fff;
+    font-weight: 700; }
+
+h1 {
+  font-size: 32pt; }
