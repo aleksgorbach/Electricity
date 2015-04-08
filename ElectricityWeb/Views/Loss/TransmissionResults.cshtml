@@ -1,0 +1,70 @@
+﻿@model ElectricityWeb.Models.Losses.TransmissionLossModel
+
+<section id="input-data">
+    @using (Ajax.BeginForm("Transmission", new AjaxOptions { UpdateTargetId = "input-data" })) {
+        <div class="row">
+            <div class="input-field col s6">
+                <label for="PhaseCount" class="active">
+                    @Html.DisplayNameFor(x => Model.PhaseCount),
+                    @Model.PhaseCountUnits
+                </label>
+                @Html.EditorFor(x => Model.PhaseCount)
+            </div>
+
+            <div class="input-field col s6">
+                <label for="Resistivity" class="active">
+                    @Html.DisplayNameFor(x => Model.Resistivity),
+                    @Model.ResistivityUnits
+                </label>
+                @Html.EditorFor(x => Model.Resistivity)
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <label for="Current" class="active">
+                    @Html.DisplayNameFor(x => Model.Current),
+                    @Model.CurrentUnits
+                </label>
+                @Html.EditorFor(x => Model.Current)
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <label for="Length" class="active">
+                    @Html.DisplayNameFor(x => Model.Length),
+                    @Model.LengthUnits
+                </label>
+                @Html.EditorFor(x => Model.Length)
+            </div>
+
+
+            <div class="input-field col s6">
+                <label for="Size" class="active">
+                    @Html.DisplayNameFor(x => Model.Size),
+                    @Model.SizeUnits
+                </label>
+                @Html.EditorFor(x => Model.Size)
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <label for="Time" class="active">
+                    @Html.DisplayNameFor(x => Model.Time),
+                    @Model.TimeUnits
+                </label>
+                @Html.EditorFor(x => Model.Time)
+            </div>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit">Рассчитать<i class="mdi-content-send right"></i></button>
+
+        if (Model.HasResult) {
+            <div class="card-panel deep-purple darken-4 white-text">
+                @Html.LabelFor(x => Model.Loss)
+                <div>
+                    @Html.DisplayFor(x => Model.Loss)
+                    @Model.LossUnits
+                </div>
+            </div>
+        }
+    }
+</section>

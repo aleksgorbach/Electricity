@@ -26,7 +26,7 @@ namespace ElectricityWeb.Models.Lines {
         }
 
         [Required]
-        [Display(Name = "Cos")]
+        [Display(Name = "Cos \u03C6")]
         public double Cos { get; set; }
 
         [Required]

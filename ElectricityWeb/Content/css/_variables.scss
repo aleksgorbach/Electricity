@@ -2,12 +2,12 @@
 $body-background-color: white;
 $body-text-color: black;
 
-$main-background-color: #ede7f6;
+$main-background-color: #EFE1DC;
 
-$menu-background-color: #311b92;
-$menu-hover-color: lighten($menu-background-color, 10%);
-$menu-link-color: #F3843E;
-$menu-link-hover-color: $menu-link-color * 1.2;
+$menu-background-color: #1a237e;
+$menu-hover-color: darken($menu-background-color, 10%);
+$menu-link-color: white;
+$menu-link-hover-color: darken($menu-link-color, 10%);
 
 $input-error-background: #f7adad;
 $error-text-color: #a12525;
@@ -16,4 +16,6 @@ $input-background-color: $body-background-color;
 $input-border-color: #fff;
 $input-text-color: #FF9900;
 
-$header-background-color: #24C2CB;
+$header-background-color: #1565c0;
+$header-menu-button-color: lighten($header-background-color, 20%);
+$header-text-color: white;

@@ -1,0 +1,79 @@
+﻿@model ElectricityWeb.Models.Losses.TransformatorLossModel
+
+<section id="input-data">
+    @using (Ajax.BeginForm("Transformator", new AjaxOptions { UpdateTargetId = "input-data", InsertionMode = InsertionMode.Replace})) {
+        <div class="row">
+            <div class="input-field col s6">
+                <label for="NominalVoltage" class="active">
+                    @Html.DisplayNameFor(x => Model.NominalVoltage),
+                    @Model.NominalVoltageUnits
+                </label>
+                @Html.EditorFor(x => Model.NominalVoltage)
+            </div>
+
+            <div class="input-field col s6">
+                <label for="NominalPower" class="active">
+                    @Html.DisplayNameFor(x => Model.NominalPower),
+                    @Model.NominalPowerUnits
+                </label>
+                @Html.EditorFor(x => Model.NominalPower)
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <label for="ConsumedEnergy" class="active">
+                    @Html.DisplayNameFor(x => Model.ConsumedEnergy),
+                    @Model.ConsumedEnergyUnits
+                </label>
+                @Html.EditorFor(x => Model.ConsumedEnergy)
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <label for="IdlingPowerLoss" class="active">
+                    @Html.DisplayNameFor(x => Model.IdlingPowerLoss),
+                    @Model.IdlingPowerLossUnits
+                </label>
+                @Html.EditorFor(x => Model.IdlingPowerLoss)
+            </div>
+
+
+            <div class="input-field col s6">
+                <label for="ShortCircuitLoss" class="active">
+                    @Html.DisplayNameFor(x => Model.ShortCircuitLoss),
+                    @Model.ShortCircuitLossUnits
+                </label>
+                @Html.EditorFor(x => Model.ShortCircuitLoss)
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <label for="LoadedHourCount" class="active">
+                    @Html.DisplayNameFor(x => Model.LoadedHourCount),
+                    @Model.LoadedHourCountUnits
+                </label>
+                @Html.EditorFor(x => Model.LoadedHourCount)
+            </div>
+
+
+            <div class="input-field col s6">
+                <label for="ConnectedTime" class="active">
+                    @Html.DisplayNameFor(x => Model.ConnectedTime),
+                    @Model.ConnectedTimeUnits
+                </label>
+                @Html.EditorFor(x => Model.ConnectedTime)
+            </div>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit">Рассчитать<i class="mdi-content-send right"></i></button>
+        
+        if (Model.HasResult) {
+            <div class="card-panel deep-purple darken-4 white-text">
+                @Html.LabelFor(x => Model.Loss)
+                <div>
+                    @Html.DisplayFor(x => Model.Loss)
+                    @Model.LossUnits
+                </div>
+            </div>
+        }
+    }
+</section>

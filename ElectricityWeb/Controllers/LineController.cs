@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 
 using DataAccessLayer.Service;
@@ -23,7 +22,7 @@ namespace ElectricityWeb.Controllers {
         public ActionResult Choose(LineViewModel model) {
             if (!ModelState.IsValid) {
                 model.HasResult = false;
-                return View(model);
+                return PartialView("LinesResult", model);
             }
             var line = Line.Choose(
                 model.Type,
@@ -35,7 +34,7 @@ namespace ElectricityWeb.Controllers {
                 model.DeltaVoltage);
             model.Initialize(line);
             model.HasResult = true;
-            return View(model);
+            return PartialView("LinesResult", model);
         }
 
         [HttpGet]

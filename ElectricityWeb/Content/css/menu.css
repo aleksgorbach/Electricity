@@ -1,3 +1,27 @@
-﻿nav {
-  font-size: 28px;
-  font-weight: 700; }
+﻿h1 {
+  font-size: 36pt; }
+
+#slideMenu {
+  background-color: #1a237e; }
+  #slideMenu li {
+    padding: 0; }
+    #slideMenu li:hover {
+      background-color: inherit; }
+    #slideMenu li.hoverable:hover {
+      background-color: #111754; }
+  #slideMenu a {
+    color: white; }
+    #slideMenu a:hover {
+      color: #e6e6e6; }
+  #slideMenu a.menu-heading, #slideMenu .menu-heading > a {
+    font-size: 24pt; }
+
+header {
+  color: white; }
+  header .row {
+    margin-bottom: 0px; }
+  header .mdi-navigation-menu {
+    color: #4f98ec; }
+  header h1 {
+    margin: 0 0 0 100px;
+    line-height: 130px; }

@@ -3,13 +3,52 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+<div class="row">
+    <div class="col s6">
+        <div class="small card preview">
+            <div class="card-image">
+                <img src="~/Content/img/cables.jpg">
+            </div>
+            <div class="card-action">
+                <a href="@Url.Action("Choose", "Line")">Подбор сечения проводов</a>
+            </div>
+        </div>
+    </div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Главная</title>
-</head>
-<body>
-</body>
-</html>
+    <div class="col s6">
+        <div class="card small preview">
+            <div class="card-image">
+                <img src="~/Content/img/async.JPG">
+            </div>
+            <div class="card-action">
+                <div>
+                    <a href="@Url.Action("Async", "Engine")">Расчет асинхронного двигателя</a>
+                </div>
+                <div>
+                    <a href="@Url.Action("Parallel", "Engine")">Расчет двигателя параллельного возбуждения</a>
+                </div>
+                <div>
+                    <a href="@Url.Action("Serial", "Engine")">Расчет двигателя последовательного возбуждения</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <div class="card small preview">
+            <div class="card-image">
+                <img src="~/Content/img/transformator.jpg">
+            </div>
+            <div class="card-action">
+                <div>
+                    <a href="@Url.Action("Transformator", "Loss")">Расчет потерь в трансформаторе</a>
+                </div>
+                <div>
+                    <a href='@Url.Action("Transmission", "Loss")'>Расчет потерь в линиях электропередач</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

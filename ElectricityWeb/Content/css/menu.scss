@@ -1,6 +1,42 @@
 ﻿@import "variables.scss";
 
-nav {
-    font-size: 28px;
-    font-weight: 700;
+h1 {
+    font-size: 36pt;
 }
+
+#slideMenu {
+    background-color: $menu-background-color;
+    li {
+        padding: 0;
+        &:hover {
+            background-color: inherit;
+        }
+        &.hoverable:hover {
+            background-color: $menu-hover-color;
+        }
+    }
+    a {
+        color: $menu-link-color;
+            &:hover {
+                color: $menu-link-hover-color;
+            }
+    }
+    a.menu-heading, .menu-heading>a {
+        font-size: 24pt;
+    }
+}
+
+header { 
+    color: $header-text-color;
+    .row {
+        margin-bottom: 0px;
+    }
+    .mdi-navigation-menu {
+        color: $header-menu-button-color;
+    }
+    h1 {
+        margin: 0 0 0 100px;
+        line-height: 130px;
+    }
+}
+

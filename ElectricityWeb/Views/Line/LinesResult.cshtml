@@ -1,0 +1,84 @@
+﻿@using DataAccessLayer.POCO.Lines
+@model ElectricityWeb.Models.Lines.LineViewModel
+
+<section id="input-data">
+    @using (Ajax.BeginForm("Choose", new AjaxOptions { UpdateTargetId = "input-data", OnBegin = "onBeforeAjaxRequest", OnSuccess = "onAfterAjaxRequest", OnFailure = "onAfterAjaxRequest" })) {
+        <div class="row">
+            <div class="input-field col s6">
+                @Html.DropDownListFor(x => Model.Type, new SelectList(Enum.GetNames(typeof(LineType)), Model.Type))
+                <label>
+                    @Html.DisplayNameFor(x => Model.Type)
+                </label>
+            </div>
+            <div class="input-field col s6">
+                @Html.DropDownListFor(x => Model.Material, new SelectList(Enum.GetNames(typeof(LineMaterial)), Model.Material))
+                <label>
+                    @Html.DisplayNameFor(x => Model.Material)
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <label for="Length" class="active">
+                    @Html.DisplayNameFor(x => Model.Length),
+                    @Model.LengthUnits
+                </label>
+                @Html.TextBoxFor(x => Model.Length)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <label for="Power" class="active">
+                    @Html.DisplayNameFor(x => Model.Power),
+                    @Model.PowerUnits
+                </label>
+                @Html.EditorFor(x => Model.Power)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <label for="Voltage" class="active">
+                    @Html.DisplayNameFor(x => Model.Voltage),
+                    @Model.VoltageUnits
+                </label>
+                @Html.EditorFor(x => Model.Voltage)
+            </div>
+            <div class="input-field col s6">
+                <label for="DeltaVoltage" class="active">
+                    @Html.DisplayNameFor(x => Model.DeltaVoltage),
+                    @Model.DeltaVoltageUnits
+                </label>
+                @Html.EditorFor(x => Model.DeltaVoltage)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <label for="Cos" class="active">
+                    @Html.DisplayNameFor(x => Model.Cos)
+                </label>
+                @Html.EditorFor(x => Model.Cos)
+            </div>
+        </div>
+
+        <button class="btn waves-effect waves-light" type="submit">Подобрать<i class="mdi-content-send right"></i></button>
+
+        <img id="loader" src="~/Content/img/ajax-loader.gif" />
+
+        if (Model.HasResult) {
+            <div class="card-panel deep-purple darken-4 white-text">
+                Рассчитанный диаметр
+                <div>
+                    <b>@Html.DisplayFor(x => Model.Square)</b> @Model.SquareUnits
+                </div>
+                Оптимальный диаметр провода
+                <div>
+                    <b>@Html.DisplayFor(x => Model.Description)</b> @Model.DescriptionUnits
+                </div>
+            </div>
+        }
+    }
+</section>

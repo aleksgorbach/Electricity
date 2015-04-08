@@ -1,3 +1,15 @@
 ﻿$(document).ready(function() {
-    $(".dropdown-button").dropdown();
-})
+    $(".button-collapse").sideNav({
+        menuWidth: 340
+    });
+    $("select").material_select();
+    $("#loader").hide();
+});
+
+function onBeforeAjaxRequest() {
+    $("#loader").show();
+}
+
+function onAfterAjaxRequest() {
+    $("#loader").hide();
+}

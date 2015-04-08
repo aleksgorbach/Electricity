@@ -1,98 +1,19 @@
-﻿@using DataAccessLayer.POCO.Lines
-@model ElectricityWeb.Models.Lines.LineViewModel
+﻿@model ElectricityWeb.Models.Lines.LineViewModel
 
 @{
     ViewBag.Title = "Расчет сечения провода";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="page-logo">
-    <img src="~/Content/Images/transmission2.png" class="visualizing" />
-</section>
-<section class="calcs">
-    @if (!string.IsNullOrEmpty(ViewBag.Error)) {
-        <div class="error">@ViewBag.Error</div>
-    }
-    @using (Html.BeginForm("Choose", "Line", FormMethod.Post, new { @class = "input-form" })) {
-        <fieldset>
-            <div class="form-group">
-                @Html.LabelFor(x => Model.Type, new { @class = "control-label" })
-                <div class="input-group">
-                    @Html.DropDownListFor(x => Model.Type, new SelectList(Enum.GetNames(typeof(LineType)), Model.Type), new { @class = "form-control" })
-                    <span class="input-group-addon"></span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(x => Model.Type, new { @class = "control-label" })
-                <div class="input-group">
-                    @Html.DropDownListFor(x => Model.Material, new SelectList(Enum.GetNames(typeof(LineMaterial)), Model.Material), new { @class = "form-control" })
-                    <span class="input-group-addon"></span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(x => Model.Power)
-                <div class="input-group">
-                    @Html.TextBoxFor(x => Model.Power, new { @class = "form-control" })
-                    <span class="input-group-addon">@Model.PowerUnits</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(x => Model.Cos)
-                <div class="input-group">
-                    @Html.TextBoxFor(x => Model.Cos, new { @class = "form-control" })
-                    <span class="input-group-addon"></span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(x => Model.Length)
-                <div class="input-group">
-                    @Html.TextBoxFor(x => Model.Length, new { @class = "form-control" })
-                    <span class="input-group-addon">@Model.LengthUnits</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(x => Model.Voltage)
-                <div class="input-group">
-                    @Html.TextBoxFor(x => Model.Voltage, new { @class = "form-control" })
-                    <span class="input-group-addon">@Model.VoltageUnits</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(x => Model.DeltaVoltage)
-                <div class="input-group">
-                    @Html.TextBoxFor(x => Model.DeltaVoltage, new { @class = "form-control" })
-                    <span class="input-group-addon">@Model.DeltaVoltageUnits</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Подобрать" class="btn btn-primary" />
-            </div>
-        </fieldset>
-    }
-</section>
-<section class="results">
-    @if (Model.HasResult) {
-        <div class="form-group">
-            @Html.LabelFor(x => Model.Square, new { @class = "control-label" })
-            <div class="input-group">
-                @Html.DisplayFor(x => Model.Square, new { @class = "form-control" })
-                @Model.SquareUnits
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(x => Model.Description, new { @class = "control-label" })
-            <div class="input-group">
-                @Html.DisplayFor(x => Model.Description, new { @class = "form-control" })
-                @Model.DescriptionUnits
-            </div>
-        </div>
-    }
-</section>
+<div class="calcs card">
+    <div class="card-image waves-effect waves-block waves-light">
+        <img class="activator" src="~/Content/img/cables.jpg">
+    </div>
+    <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">Расчет сечения провода <i class="mdi-navigation-more-vert right"></i></span>
+    </div>
+    <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">Расчет сечения провода <i class="mdi-navigation-close right"></i></span>
+        @Html.Partial("LinesResult")
+    </div>
+</div>

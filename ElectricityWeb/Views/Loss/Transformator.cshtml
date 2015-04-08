@@ -1,0 +1,19 @@
+﻿@model ElectricityWeb.Models.Losses.TransformatorLossModel
+
+@{
+    ViewBag.Title = "Потери в трансформаторе";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="calcs card">
+    <div class="card-image waves-effect waves-block waves-light">
+        <img class="activator" src="~/Content/img/transformator.jpg">
+    </div>
+    <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">Расчет потерь в трансформаторе <i class="mdi-navigation-more-vert right"></i></span>
+    </div>
+    <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">Расчет потерь в трансформаторе <i class="mdi-navigation-close right"></i></span>
+        @Html.Partial("TransformatorResults")
+    </div>
+</div>

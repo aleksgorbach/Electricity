@@ -8,12 +8,13 @@
 
     <!-- jQuery
     ------------------------------------------------>
-    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="~/Content/js/jquery/jquery-2.1.3.min.js"></script>
+    <script src="~/Content/js/jquery/jquery.unobtrusive-ajax.min.js"></script>
 
     <!-- Materialize
     ------------------------------------------------>
     <link href="~/Content/css/materialize.min.css" rel="stylesheet" media="screen,projection" />
-    <script src="~/Content/js/bin/materialize.min.js"></script>
+    <script src="~/Content/js/target/materialize.min.js"></script>
 
 
     <!-- Custom styles
@@ -23,43 +24,48 @@
     <script src="~/Content/js/site.js"></script>
 
 </head>
-<body class="container">
-    <header>
-        <h1>@ViewBag.Title</h1>
-        <ul id="losses_dropdown" class="dropdown-content">
-            <li><a href="@Url.Action("TransformatorLoss", "Home")">Потери в трансформаторе</a></li>
-            <li><a href="@Url.Action("TransmissionLoss", "Home")">Потери в линиях передач</a></li>
-        </ul>
-        <ul id="engines_dropdown" class="dropdown-content">
-            <li><a href="@Url.Action("Async", "Engine")">Асинхронный двигатель</a></li>
-            <li><a href="@Url.Action("Parallel", "Engine")">Двигатель параллельного возбуждения</a></li>
-            <li><a href="@Url.Action("Serial", "Engine")">Двигатель последовательного возбуждения</a></li>
-        </ul>
-        <ul id="lines_dropdown" class="dropdown-content">
-            <li>
-                <a href="@Url.Action("Choose", "Line")">Расчет сечения провода</a>
-            </li>
-        </ul>
-        <nav role="navigation">
-            <div class="nav-wrapper">
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="@Url.Action("Index", "Home")">Главная</a></li>
-                    <li>
-                        <a class="dropdown-button" data-activates="losses_dropdown" href="#">Потери<i class="mdi-navigation-arrow-drop-down right"></i></a>
-                    </li>
-                    <li>
-                        <a class="dropdown-button" data-activates="engines_dropdown" href="#">Двигатели<i class="mdi-navigation-arrow-drop-down right"></i></a>
-                    </li>
-                    <li>
-                        <a class="dropdown-button" data-activates="lines_dropdown" href="#">Линии<i class="mdi-navigation-arrow-drop-down right"></i></a>
-                    </li>
-                    <li><a href="#">О сайте</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <main>
-        @RenderBody()
-    </main>
+
+<body>
+    <ul id="slideMenu" class="side-nav full col s4">
+        <li class="hoverable menu-heading"><a href="@Url.Action("Index", "Home")">Главная</a></li>
+        <li>
+            <a class="menu-heading">Потери</a>
+            <ul>
+                <li class="hoverable"><a href="@Url.Action("Transformator", "Loss")">В трансформаторе</a></li>
+                <li class="hoverable"><a href="@Url.Action("Transmission", "Loss")">В линиях передач</a></li>
+            </ul>
+        </li>
+        <li>
+            <a class="menu-heading">Двигатели</a>
+            <ul>
+                <li class="hoverable"><a href="@Url.Action("Async", "Engine")">Асинхронный</a></li>
+                <li class="hoverable"><a href="@Url.Action("Parallel", "Engine")">Параллельного возбуждения</a></li>
+                <li class="hoverable"><a href="@Url.Action("Serial", "Engine")">Последовательного возбуждения</a></li>
+            </ul>
+        </li>
+        <li>
+            <a class="menu-heading">Линии</a>
+            <ul>
+                <li class="hoverable">
+                    <a href="@Url.Action("Choose", "Line")">Расчет сечения провода</a>
+                </li>
+            </ul>
+        </li>
+        <li class="hoverable menu-heading">
+            <a href="#">О сайте</a>
+        </li>
+    </ul>
+    <div class="container">
+        <header>
+            <a href="#" data-activates="slideMenu" class="button-collapse left">
+                <i class="large mdi-navigation-menu"></i>
+            </a>
+            <h1>@ViewBag.Title</h1>
+        </header>
+
+        <section class="main">
+            @RenderBody()
+        </section>
+    </div>
 </body>
 </html>
