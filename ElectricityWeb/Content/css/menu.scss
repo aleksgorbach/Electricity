@@ -17,9 +17,10 @@ h1 {
     }
     a {
         color: $menu-link-color;
-            &:hover {
-                color: $menu-link-hover-color;
-            }
+        height: 100% !important;
+        &:hover {
+            color: $menu-link-hover-color;
+        }
     }
     a.menu-heading, .menu-heading>a {
         font-size: 24pt;

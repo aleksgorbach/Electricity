@@ -21,7 +21,7 @@
     ------------------------------------------------>
     <link rel="stylesheet" href="~/Content/css/site.min.css" />
     <link rel="stylesheet" href="~/Content/css/menu.min.css" />
-    <script src="~/Content/js/site.js"></script>
+    <script src="~/Content/js/custom/site.js"></script>
 
 </head>
 
@@ -29,18 +29,18 @@
     <ul id="slideMenu" class="side-nav full col s4">
         <li class="hoverable menu-heading"><a href="@Url.Action("Index", "Home")">Главная</a></li>
         <li>
-            <a class="menu-heading">Потери</a>
+            <a class="menu-heading">Расчет потерь</a>
             <ul>
                 <li class="hoverable"><a href="@Url.Action("Transformator", "Loss")">В трансформаторе</a></li>
-                <li class="hoverable"><a href="@Url.Action("Transmission", "Loss")">В линиях передач</a></li>
+                <li class="hoverable"><a href="@Url.Action("Transmission", "Loss")">В кабельной линии</a></li>
             </ul>
         </li>
         <li>
-            <a class="menu-heading">Двигатели</a>
+            <a class="menu-heading">Расчет электрических машин</a>
             <ul>
-                <li class="hoverable"><a href="@Url.Action("Async", "Engine")">Асинхронный</a></li>
-                <li class="hoverable"><a href="@Url.Action("Parallel", "Engine")">Параллельного возбуждения</a></li>
-                <li class="hoverable"><a href="@Url.Action("Serial", "Engine")">Последовательного возбуждения</a></li>
+                <li class="hoverable"><a href="@Url.Action("Async", "Engine")">Асинхронный двигатель</a></li>
+                <li class="hoverable"><a href="@Url.Action("Parallel", "Engine")">Двигатель параллельного возбуждения</a></li>
+                <li class="hoverable"><a href="@Url.Action("Serial", "Engine")">Двигатель последовательного возбуждения</a></li>
             </ul>
         </li>
         <li>

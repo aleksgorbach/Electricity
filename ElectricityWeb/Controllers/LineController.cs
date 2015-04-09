@@ -22,7 +22,7 @@ namespace ElectricityWeb.Controllers {
         public ActionResult Choose(LineViewModel model) {
             if (!ModelState.IsValid) {
                 model.HasResult = false;
-                return PartialView("LinesResult", model);
+                return PartialView("_LinesResult", model);
             }
             var line = Line.Choose(
                 model.Type,
@@ -34,7 +34,7 @@ namespace ElectricityWeb.Controllers {
                 model.DeltaVoltage);
             model.Initialize(line);
             model.HasResult = true;
-            return PartialView("LinesResult", model);
+            return PartialView("_LinesResult", model);
         }
 
         [HttpGet]

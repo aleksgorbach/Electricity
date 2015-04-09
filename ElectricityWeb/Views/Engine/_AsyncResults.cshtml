@@ -1,0 +1,134 @@
+﻿@model ElectricityWeb.Models.Engine.AsyncEngineModel
+
+<section id="input-data">
+    @using (Ajax.BeginForm("Async", new AjaxOptions { UpdateTargetId = "input-data", OnBegin = "onBeforeAjaxRequest", OnSuccess = "onAfterAjaxRequest", OnFailure = "onAfterAjaxRequest" })) {
+        <div class="row">
+            <div class="input-field col s12">
+                <label for="NominalPower" class="active">
+                    @Html.DisplayNameFor(x => Model.NominalPower),
+                    @Model.NominalPowerUnits
+                </label>
+                @Html.TextBoxFor(x => Model.NominalPower)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <label for="NominalVoltage" class="active">
+                    @Html.DisplayNameFor(x => Model.NominalVoltage),
+                    @Model.NominalVoltageUnits
+                </label>
+                @Html.EditorFor(x => Model.NominalVoltage)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <label for="Frequency" class="active">
+                    @Html.DisplayNameFor(x => Model.Frequency),
+                    @Model.FrequencyUnits
+                </label>
+                @Html.EditorFor(x => Model.Frequency)
+            </div>
+            <div class="input-field col s6">
+                <label for="Cosinus" class="active">
+                    @Html.DisplayNameFor(x => Model.Cosinus)
+                </label>
+                @Html.EditorFor(x => Model.Cosinus)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <label for="UsingCoefficient" class="active">
+                    @Html.DisplayNameFor(x => Model.UsingCoefficient),
+                    @Model.UsingCoefficientUnits
+                </label>
+                @Html.EditorFor(x => Model.UsingCoefficient)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <label for="CurrentsRelation" class="active">
+                    @Html.DisplayNameFor(x => Model.CurrentsRelation)
+                </label>
+                @Html.EditorFor(x => Model.CurrentsRelation)
+            </div>
+            <div class="input-field col s6">
+                <label for="MomentsRelation" class="active">
+                    @Html.DisplayNameFor(x => Model.MomentsRelation),
+                </label>
+                @Html.EditorFor(x => Model.MomentsRelation)
+            </div>
+        </div>
+
+        <button class="btn waves-effect waves-light" type="submit">Рассчитать<i class="mdi-content-send right"></i></button>
+
+        <img id="loader" src="~/Content/img/ajax-loader.gif" />
+
+        if (Model.HasResult) {
+            <div class="card-panel deep-purple darken-4 white-text">
+                <div class="row">
+                    <div class="col s4">
+                        @Html.DisplayNameFor(x => Model.ActivePower):
+                        @Html.DisplayFor(x => Model.ActivePower)
+                        @Html.DisplayFor(x => x.ActivePowerUnits)
+                    </div>
+                    <div class="col s4">
+                        @Html.DisplayNameFor(x => Model.NominalMoment):
+                        @Html.DisplayFor(x => Model.NominalMoment)
+                        @Html.DisplayFor(x => x.NominalMomentUnits)
+                    </div>
+                    <div class="col s4">
+                        @Html.DisplayNameFor(x => Model.CriticalMoment):
+                        @Html.DisplayFor(x => Model.CriticalMoment)
+                        @Html.DisplayFor(x => x.CriticalMomentUnits)
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s4">
+                        @Html.DisplayNameFor(x => Model.PolesPairCount):
+                        @Html.DisplayFor(x => Model.PolesPairCount)
+                        @Html.DisplayFor(x => x.PolesPairCountUnits)
+                    </div>
+                    <div class="col s4">
+                        @Html.DisplayNameFor(x => Model.NominalSlip):
+                        @Html.DisplayFor(x => Model.NominalSlip)
+                        @Html.DisplayFor(x => x.NominalSlipUnits)
+                    </div>
+                    <div class="col s4">
+                        @Html.DisplayNameFor(x => Model.CriticalSlip):
+                        @Html.DisplayFor(x => Model.CriticalSlip)
+                        @Html.DisplayFor(x => x.CriticalSlipUnits)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4">
+                        @Html.DisplayNameFor(x => Model.NominalCurrent):
+                        @Html.DisplayFor(x => Model.NominalCurrent)
+                        @Html.DisplayFor(x => x.NominalCurrentUnits)
+                    </div>
+                    <div class="col s4">
+                        @Html.DisplayNameFor(x => Model.StartingCurrent):
+                        @Html.DisplayFor(x => Model.StartingCurrent)
+                        @Html.DisplayFor(x => x.StartingCurrentUnits)
+                    </div>
+                    <div class="col s4"></div>
+                </div>
+                <div class="row">
+                    <div class="col s4">
+                        @if (Model.CanStart) {
+                            <text>Запуск возможен</text>
+                        }
+                        else {
+                            <text>Запуск невозможен</text>
+                        }
+                    </div>
+                </div>
+                @Html.Partial("_AsyncChart", Model.CharasteristicTable)
+            </div>
+        }
+    }
+</section>

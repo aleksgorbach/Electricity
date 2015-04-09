@@ -10,7 +10,8 @@
     #slideMenu li.hoverable:hover {
       background-color: #111754; }
   #slideMenu a {
-    color: white; }
+    color: white;
+    height: 100% !important; }
     #slideMenu a:hover {
       color: #e6e6e6; }
   #slideMenu a.menu-heading, #slideMenu .menu-heading > a {

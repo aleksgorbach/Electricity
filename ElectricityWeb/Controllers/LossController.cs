@@ -28,7 +28,7 @@ namespace ElectricityWeb.Controllers
             if (!ModelState.IsValid) {
                 ViewBag.Error = "Пожалуйста, заполните все поля!";
                 model.HasResult = false;
-                return PartialView("TransformatorResults", model);
+                return PartialView("_TransformatorResults", model);
             }
             var loss = new TransformatorLoss(
                 model.NominalPower,
@@ -40,7 +40,7 @@ namespace ElectricityWeb.Controllers
                 model.ConnectedTime);
             model.Loss = loss.Value;
             model.HasResult = true;
-            return PartialView("TransformatorResults", model);
+            return PartialView("_TransformatorResults", model);
         }
 
 
@@ -54,7 +54,7 @@ namespace ElectricityWeb.Controllers
         public ActionResult Transmission(TransmissionLossModel model) {
             if (!ModelState.IsValid) {
                 model.HasResult = false;
-                return PartialView("TransmissionResults", model);
+                return PartialView("_TransmissionResults", model);
             }
             var loss = new TransmissionLoss(
                 model.PhaseCount,
@@ -65,7 +65,7 @@ namespace ElectricityWeb.Controllers
                 model.Time);
             model.Loss = loss.Value;
             model.HasResult = true;
-            return PartialView("TransmissionResults", model);
+            return PartialView("_TransmissionResults", model);
         }
     }
 }

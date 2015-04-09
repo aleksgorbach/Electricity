@@ -7,153 +7,21 @@
 
 <script src="~/Scripts/Highcharts-4.0.1/js/highcharts.js"></script>
 
-<section class="three columns">
-    <img src="~/Content/Images/engine.png" class="visualizing"/>
-</section>
-<section class="four columns">
-    @if (!string.IsNullOrEmpty(ViewBag.Error)) {
-        <div class="error">@ViewBag.Error</div>
-    }
-    @using (Html.BeginForm("Async", "Engine", FormMethod.Post, new { @class = "input-form" })) {
-        <fieldset>
-            <div class="form-group">
-                @Html.LabelFor(x => Model.NominalPower, new { @class = "control-label" })
-                <div class="input-group">
-                    @Html.TextBoxFor(x => Model.NominalPower, new { @class = "form-control" })
-                    <span class="input-group-addon">@Model.NominalPowerUnits</span>
-                </div>
-            </div>
+@*
+    <div id="async-chart">
+        @Html.Action("AsyncChart", "Engine", new {model=Model})
+    </div>
+*@
 
-            <div class="form-group">
-                @Html.LabelFor(x => Model.NominalVoltage)
-                <div class="input-group">
-                    @Html.TextBoxFor(x => Model.NominalVoltage, new { @class = "form-control" })
-                    <span class="input-group-addon">@Model.NominalVoltageUnits</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(x => Model.Frequency)
-                <div class="input-group">
-                    @Html.TextBoxFor(x => Model.Frequency, new { @class = "form-control" })
-                    <span class="input-group-addon">@Model.FrequencyUnits</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(x => Model.UsingCoefficient)
-                <div class="input-group">
-                    @Html.TextBoxFor(x => Model.UsingCoefficient, new { @class = "form-control" })
-                    <span class="input-group-addon">@Model.UsingCoefficientUnits</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(x => Model.Cosinus)
-                <div class="input-group">
-                    @Html.TextBoxFor(x => Model.Cosinus, new { @class = "form-control" })
-                    <span class="input-group-addon">@Model.CosinusUnits</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(x => Model.CurrentsRelation)
-                <div class="input-group">
-                    @Html.TextBoxFor(x => Model.CurrentsRelation, new { @class = "form-control" })
-                    <span class="input-group-addon">@Model.CurrentsRelationUnits</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(x => Model.MomentsRelation)
-                <div class="input-group">
-                    @Html.TextBoxFor(x => Model.MomentsRelation, new { @class = "form-control" })
-                    <span class="input-group-addon">@Model.MomentsRelationUnits</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Рассчитать" class="btn btn-primary"/>
-            </div>
-        </fieldset>
-    }
-</section>
-<section class="five columns">
-    @if (Model.HasResult) {
-        <div class="form-group">
-            @Html.LabelFor(x => Model.ActivePower, new { @class = "control-label" })
-            <div class="input-group">
-                @Html.DisplayFor(x => Model.ActivePower, new { @class = "form-control" })
-                @Model.ActivePowerUnits
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(x => Model.NominalMoment, new { @class = "control-label" })
-            <div class="input-group">
-                @Html.DisplayFor(x => Model.NominalMoment, new { @class = "form-control" })
-                @Model.NominalMomentUnits
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(x => Model.CriticalMoment, new { @class = "control-label" })
-            <div class="input-group">
-                @Html.DisplayFor(x => Model.CriticalMoment, new { @class = "form-control" })
-                @Model.CriticalMomentUnits
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(x => Model.NominalCurrent, new { @class = "control-label" })
-            <div class="input-group">
-                @Html.DisplayFor(x => Model.NominalCurrent, new { @class = "form-control" })
-                @Model.NominalCurrentUnits
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(x => Model.StartingCurrent, new { @class = "control-label" })
-            <div class="input-group">
-                @Html.DisplayFor(x => Model.StartingCurrent, new { @class = "form-control" })
-                @Model.StartingCurrentUnits
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(x => Model.PolesPairCount, new { @class = "control-label" })
-            <div class="input-group">
-                @Html.DisplayFor(x => Model.PolesPairCount, new { @class = "form-control" })
-                @Model.PolesPairCountUnits
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(x => Model.NominalSlip, new { @class = "control-label" })
-            <div class="input-group">
-                @Html.DisplayFor(x => Model.NominalSlip, new { @class = "form-control" })
-                @Model.NominalSlipUnits
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(x => Model.CriticalSlip, new { @class = "control-label" })
-            <div class="input-group">
-                @Html.DisplayFor(x => Model.CriticalSlip, new { @class = "form-control" })
-                @Model.CriticalSlipUnits
-            </div>
-        </div>
-
-        <div class="form-group">
-            @if (Model.CanStart) {
-                <text>Запуск возможен</text>
-            }
-            else {
-                <text>Запуск невозможен</text>
-            }
-        </div>
-        <div id="async-chart">
-            @Html.Action("AsyncChart", "Engine", new {model=Model})
-        </div>
-    }
-</section>
+<div class="calcs card">
+    <div class="card-image waves-effect waves-block waves-light">
+        <img class="activator" src="~/Content/img/async.JPG">
+    </div>
+    <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">Расчет асинхронного двигателя <i class="mdi-navigation-more-vert right"></i></span>
+    </div>
+    <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">Расчет асинхронного двигателя <i class="mdi-navigation-close right"></i></span>
+        @Html.Partial("_AsyncResults")
+    </div>
+</div>

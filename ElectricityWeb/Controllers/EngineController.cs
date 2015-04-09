@@ -26,7 +26,7 @@ namespace ElectricityWeb.Controllers {
         public ActionResult Async(AsyncEngineModel model) {
             if (!ModelState.IsValid) {
                 model.HasResult = false;
-                return View(model);
+                return PartialView("_AsyncResults", model);
             }
 
             var charasteristic = AsyncEngine.GetCharasteristic(
@@ -39,22 +39,22 @@ namespace ElectricityWeb.Controllers {
                 model.MomentsRelation.Value);
             model.SetCharacteristic(charasteristic);
             model.HasResult = true;
-            return View(model);
+            return PartialView("_AsyncResults", model);
         }
 
-        public ActionResult AsyncChart(AsyncEngineModel model) {
-            var xAxis = model.CharasteristicTable.Select(x => x.Moment.ToString("##.0")).ToArray();
-            var yAxis = model.CharasteristicTable.Select(x => new object[] { x.Count }).ToArray();
+        //public ActionResult AsyncChart(AsyncEngineModel model) {
+        //    var xAxis = model.CharasteristicTable.Select(x => x.Moment.ToString("##.0")).ToArray();
+        //    var yAxis = model.CharasteristicTable.Select(x => new object[] { x.Count }).ToArray();
 
 
-            var chart = new Highcharts("chart");
-            chart.InitChart(new Chart { DefaultSeriesType = ChartTypes.Line });
-            chart.SetTitle(new Title { Text = "Характеристика" });
-            chart.SetXAxis(new XAxis { Categories = xAxis  });
-            chart.SetYAxis(new YAxis { Title = new YAxisTitle { Text = "Обороты" } });
-            chart.SetSeries(new[] { new Series { Data = new Data(yAxis), Name = "Количество оборотов" } });
-            return PartialView(chart);
-        }
+        //    var chart = new Highcharts("chart");
+        //    chart.InitChart(new Chart { DefaultSeriesType = ChartTypes.Line });
+        //    chart.SetTitle(new Title { Text = "Характеристика" });
+        //    chart.SetXAxis(new XAxis { Categories = xAxis  });
+        //    chart.SetYAxis(new YAxis { Title = new YAxisTitle { Text = "Обороты" } });
+        //    chart.SetSeries(new[] { new Series { Data = new Data(yAxis), Name = "Количество оборотов" } });
+        //    return PartialView(chart);
+        //}
 
         [HttpGet]
         public ActionResult Parallel() {

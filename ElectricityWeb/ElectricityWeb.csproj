@@ -156,6 +156,7 @@
     <Content Include="Content\img\transmission.jpg" />
     <Content Include="Content\img\transmission2.png" />
     <Content Include="Content\js\animation.js" />
+    <Content Include="Content\js\custom\charts.js" />
     <Content Include="Content\js\target\materialize.js" />
     <Content Include="Content\js\target\materialize.min.js" />
     <Content Include="Content\js\buttons.js" />
@@ -177,7 +178,7 @@
     <Content Include="Content\js\scrollFire.js" />
     <Content Include="Content\js\scrollspy.js" />
     <Content Include="Content\js\sideNav.js" />
-    <Content Include="Content\js\site.js" />
+    <Content Include="Content\js\custom\site.js" />
     <Content Include="Content\js\slider.js" />
     <Content Include="Content\js\tabs.js" />
     <Content Include="Content\js\toasts.js" />
@@ -193,39 +194,6 @@
     </Content>
     <Content Include="Global.asax" />
     <Content Include="Content\img\bg.png" />
-    <Content Include="Content\js\highcharts\js\adapters\standalone-framework.js" />
-    <Content Include="Content\js\highcharts\js\adapters\standalone-framework.src.js" />
-    <Content Include="Content\js\highcharts\js\highcharts-3d.js" />
-    <Content Include="Content\js\highcharts\js\highcharts-3d.src.js" />
-    <Content Include="Content\js\highcharts\js\highcharts-all.js" />
-    <Content Include="Content\js\highcharts\js\highcharts-more.js" />
-    <Content Include="Content\js\highcharts\js\highcharts-more.src.js" />
-    <Content Include="Content\js\highcharts\js\highcharts.js" />
-    <Content Include="Content\js\highcharts\js\highcharts.src.js" />
-    <Content Include="Content\js\highcharts\js\modules\canvas-tools.js" />
-    <Content Include="Content\js\highcharts\js\modules\canvas-tools.src.js" />
-    <Content Include="Content\js\highcharts\js\modules\data.js" />
-    <Content Include="Content\js\highcharts\js\modules\data.src.js" />
-    <Content Include="Content\js\highcharts\js\modules\drilldown.js" />
-    <Content Include="Content\js\highcharts\js\modules\drilldown.src.js" />
-    <Content Include="Content\js\highcharts\js\modules\exporting.js" />
-    <Content Include="Content\js\highcharts\js\modules\exporting.src.js" />
-    <Content Include="Content\js\highcharts\js\modules\funnel.js" />
-    <Content Include="Content\js\highcharts\js\modules\funnel.src.js" />
-    <Content Include="Content\js\highcharts\js\modules\heatmap.js" />
-    <Content Include="Content\js\highcharts\js\modules\heatmap.src.js" />
-    <Content Include="Content\js\highcharts\js\modules\no-data-to-display.js" />
-    <Content Include="Content\js\highcharts\js\modules\no-data-to-display.src.js" />
-    <Content Include="Content\js\highcharts\js\modules\solid-gauge.js" />
-    <Content Include="Content\js\highcharts\js\modules\solid-gauge.src.js" />
-    <Content Include="Content\js\highcharts\js\themes\dark-blue.js" />
-    <Content Include="Content\js\highcharts\js\themes\dark-green.js" />
-    <Content Include="Content\js\highcharts\js\themes\dark-unica.js" />
-    <Content Include="Content\js\highcharts\js\themes\gray.js" />
-    <Content Include="Content\js\highcharts\js\themes\grid-light.js" />
-    <Content Include="Content\js\highcharts\js\themes\grid.js" />
-    <Content Include="Content\js\highcharts\js\themes\sand-signika.js" />
-    <Content Include="Content\js\highcharts\js\themes\skies.js" />
     <Content Include="Content\css\menu.css">
       <DependentUpon>menu.scss</DependentUpon>
     </Content>
@@ -243,6 +211,8 @@
     <Content Include="Content\js\jquery\jquery-2.1.3.min.js" />
     <Content Include="Content\js\jquery\jquery.unobtrusive-ajax.js" />
     <Content Include="Content\js\jquery\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Content\js\chartjs\Chart.js" />
+    <Content Include="Content\js\chartjs\Chart.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -251,12 +221,12 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Loss\TransmissionResults.cshtml" />
-    <Content Include="Views\Line\LinesResult.cshtml" />
+    <Content Include="Views\Loss\_TransmissionResults.cshtml" />
+    <Content Include="Views\Line\_LinesResult.cshtml" />
+    <Content Include="Views\Engine\_AsyncResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -340,14 +310,14 @@
     <Content Include="Content\font\roboto\Roboto-Thin.woff" />
     <Content Include="Content\font\roboto\Roboto-Thin.woff2" />
     <None Include="Properties\PublishProfiles\MyAsp.net.pubxml" />
-    <Content Include="Views\Engine\AsyncChart.cshtml" />
+    <Content Include="Views\Engine\_AsyncChart.cshtml" />
     <Content Include="Content\js\jquery\jquery-2.1.3.min.map" />
     <None Include="Views\Engine\Parallel.cshtml" />
     <Content Include="Views\Engine\Serial.cshtml" />
     <Content Include="Views\Line\Choose.cshtml" />
     <Content Include="Views\Line\Edit.cshtml" />
     <Content Include="Views\Line\LinesTable.cshtml" />
-    <Content Include="Views\Loss\TransformatorResults.cshtml" />
+    <Content Include="Views\Loss\_TransformatorResults.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

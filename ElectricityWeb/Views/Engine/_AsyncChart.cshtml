@@ -1,0 +1,10 @@
+﻿@model List<ElectricityWeb.Models.Engine.AsyncEngineModel.CharasteristicItemModel>
+
+<script src="~/Content/js/chartjs/Chart.min.js"></script>
+<script src="~/Content/js/custom/charts.js"></script>
+<script type="text/javascript">
+    var data = @Html.Raw(Json.Encode(Model));
+    drawChart(data);
+</script>
+
+<canvas id="chart" height="400" width="600"></canvas>

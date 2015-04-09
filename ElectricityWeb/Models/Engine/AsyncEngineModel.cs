@@ -170,8 +170,8 @@ namespace ElectricityWeb.Models.Engine {
         [Display(Name = "Возможность запуска")]
         public bool CanStart { get; set; }
 
-        public List<CharasteristicItemModel> CharasteristicTable; 
-
+        public List<CharasteristicItemModel> CharasteristicTable;
+ 
         #endregion
 
         public void SetCharacteristic(AsyncEngine.Charasteristic charasteristic) {
