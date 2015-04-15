@@ -152,7 +152,6 @@
     <Content Include="Content\img\engine.png" />
     <Content Include="Content\img\engine2.png" />
     <Content Include="Content\img\transformator.jpg" />
-    <Content Include="Content\img\transformator2.png" />
     <Content Include="Content\img\transmission.jpg" />
     <Content Include="Content\img\transmission2.png" />
     <Content Include="Content\js\animation.js" />
