@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -20,8 +21,11 @@
     <!-- Custom styles
     ------------------------------------------------>
     <link rel="stylesheet" href="~/Content/css/site.min.css" />
-    <link rel="stylesheet" href="~/Content/css/menu.min.css" />
+    <link rel="stylesheet" href="~/Content/css/menu.min.css"/>
+
     <script src="~/Content/js/custom/site.js"></script>
+
+    @RenderSection("Styles", false)
 
 </head>
 
@@ -55,17 +59,18 @@
             <a href="#">О сайте</a>
         </li>
     </ul>
-    <div class="container">
-        <header>
-            <a href="#" data-activates="slideMenu" class="button-collapse left">
-                <i class="large mdi-navigation-menu"></i>
-            </a>
-            <h1>@ViewBag.Title</h1>
-        </header>
+<div class="container">
+    <header>
+        <a href="#" data-activates="slideMenu" class="button-collapse left">
+            <i class="large mdi-navigation-menu"></i>
+        </a>
+        <h1>@ViewBag.Title</h1>
+    </header>
 
-        <section class="main">
-            @RenderBody()
-        </section>
-    </div>
+    <section class="main">
+        @RenderBody()
+    </section>
+</div>
+    @RenderSection("Scripts", false)
 </body>
 </html>

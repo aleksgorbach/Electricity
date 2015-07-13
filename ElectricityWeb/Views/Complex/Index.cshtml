@@ -1,0 +1,17 @@
+﻿@model dynamic
+@section Scripts {
+    <script src="~/Content/js/custom/complex/complex.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.min.js"></script>
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/Content/css/complex.css">
+}
+
+@{
+    ViewBag.Title = "Выбор аппаратов защиты";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<canvas id="canvas" width="960" height="640"></canvas>
