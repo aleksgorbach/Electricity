@@ -169,6 +169,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\apps\complex\complex.js" />
+    <Content Include="Content\apps\complex\min\complex.min.js" />
     <Content Include="Content\css\complex.css">
       <DependentUpon>complex.scss</DependentUpon>
     </Content>
@@ -187,8 +189,6 @@
     <Content Include="Content\img\transmission2.png" />
     <Content Include="Content\js\animation.js" />
     <Content Include="Content\js\custom\charts.js" />
-    <Content Include="Content\js\custom\complex\complex.js" />
-    <Content Include="Content\js\custom\complex\tools.js" />
     <Content Include="Content\js\target\materialize.js" />
     <Content Include="Content\js\target\materialize.min.js" />
     <Content Include="Content\js\buttons.js" />
@@ -239,6 +239,7 @@
       <DependentUpon>site.css</DependentUpon>
     </Content>
     <Content Include="Content\css\complex.scss" />
+    <Content Include="Content\apps\complex\complex.js.map" />
     <None Include="Content\js\jquery\jquery-2.1.3.intellisense.js" />
     <Content Include="Content\js\jquery\jquery-2.1.3.js" />
     <Content Include="Content\js\jquery\jquery-2.1.3.min.js" />
@@ -246,6 +247,7 @@
     <Content Include="Content\js\jquery\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Content\js\chartjs\Chart.js" />
     <Content Include="Content\js\chartjs\Chart.min.js" />
+    <Content Include="gruntfile.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -260,7 +262,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -343,6 +344,7 @@
     <Content Include="Content\font\roboto\Roboto-Thin.ttf" />
     <Content Include="Content\font\roboto\Roboto-Thin.woff" />
     <Content Include="Content\font\roboto\Roboto-Thin.woff2" />
+    <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\MyAsp.net.pubxml" />
     <Content Include="Views\Engine\_AsyncChart.cshtml" />
     <Content Include="Content\js\jquery\jquery-2.1.3.min.map" />
@@ -355,9 +357,11 @@
     <Content Include="Views\Loss\_TransformatorResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Content\js\custom\complex\complex.ts" />
-    <TypeScriptCompile Include="Content\js\custom\complex\tools.ts" />
+    <TypeScriptCompile Include="Content\apps\complex\complex.ts" />
+    <TypeScriptCompile Include="Content\apps\complex\tools.ts" />
+    <TypeScriptCompile Include="Content\apps\complex\visual\visual.ts" />
     <TypeScriptCompile Include="Content\js\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Content\js\typings\fabricjs\fabricjs.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
