@@ -14,9 +14,11 @@
      }
 
      public init(): void {
-         this.elements.push(new visual.rectElement().initRect(this.canvas, new Tools.Position(100, 200), new Tools.Size(200, 100), true, "green"));
-         this.elements.push(new visual.circleElement().initCircle(this.canvas, new Tools.Position(400, 100), 20, false));
-         this.elements.push(new visual.imageElement().initImage(this.canvas, new Tools.Position(400, 100), new Tools.Size(100, 100), '../Content/apps/complex/img/test.png', true));
+         var rect = new visual.rectElement().initRect(this.canvas, new Tools.Position(100, 200), new Tools.Size(200, 100), true, "green");
+         var circle = new visual.circleElement().initCircle(this.canvas, new Tools.Position(400, 100), 20, false);
+         var image = new visual.imageElement().initImage(this.canvas, new Tools.Position(400, 100), new Tools.Size(100, 100), '../Content/apps/complex/img/test.png', true);
+         var line = new visual.connectingLine().initLine(this.canvas, rect, circle, false, "red");
+         this.elements.push(rect, circle, image, line);
      }
 
 
