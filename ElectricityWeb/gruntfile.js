@@ -3,15 +3,15 @@ module.exports = function (grunt) {
         ts: {
             default: {
                 src: ["Content/apps/complex/**/*.ts"],
-                out: "Content/apps/complex/complex.js"
+                out: "Content/apps/complex/js/complex.js"
             }
         },
         minified: {
             files: {
                 src: [
-                    'Content/apps/complex/complex.js'
+                    'Content/apps/complex/js/complex.js'
                 ],
-                dest: 'Content/apps/complex/min/'
+                dest: 'Content/apps/complex/js/min/'
             },
             options: {
                 allinone: true,
