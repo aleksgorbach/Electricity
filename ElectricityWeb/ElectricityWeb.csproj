@@ -169,7 +169,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="Content\apps\complex\complex.js" />
+    <Content Include="Content\apps\complex\js\complex.js" />
+    <Content Include="Content\apps\complex\js\min\complex.min.js" />
     <Content Include="Content\apps\complex\min\complex.min.js" />
     <Content Include="Content\css\complex.css">
       <DependentUpon>complex.scss</DependentUpon>
@@ -239,7 +240,7 @@
       <DependentUpon>site.css</DependentUpon>
     </Content>
     <Content Include="Content\css\complex.scss" />
-    <Content Include="Content\apps\complex\complex.js.map" />
+    <Content Include="Content\apps\complex\js\complex.js.map" />
     <None Include="Content\js\jquery\jquery-2.1.3.intellisense.js" />
     <Content Include="Content\js\jquery\jquery-2.1.3.js" />
     <Content Include="Content\js\jquery\jquery-2.1.3.min.js" />
@@ -358,6 +359,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Content\apps\complex\complex.ts" />
+    <TypeScriptCompile Include="Content\apps\complex\input\input.ts" />
     <TypeScriptCompile Include="Content\apps\complex\tools.ts" />
     <TypeScriptCompile Include="Content\apps\complex\visual\visual.ts" />
     <TypeScriptCompile Include="Content\js\typings\jquery\jquery.d.ts" />

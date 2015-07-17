@@ -2,11 +2,12 @@
 ///<reference path="../tools.ts"/>
 
 module visual {
-	export interface positioned {
-		position: Tools.Position;
+	interface positioned {
+		x: number;
+		y: number;
 	}
 	
-	export class visualElement {
+	class visualElement {
 		private object: fabric.IObject;
 		
 		get canvasObject() : fabric.IObject {
@@ -17,24 +18,35 @@ module visual {
 			this.object = object;
 			object.selectable = interactable || false;
 			object.hasBorders = false;
+			object.hasControls = false;
+			object.hasRotatingPoint = false;
 	    }
 	} 
 	
-	export class sizableElement extends visualElement implements positioned {
-		private connectings: oneSideConnecting[] = [];
+	class sizableElement extends visualElement implements positioned {
+		private connections: connectingLine[] = [];
 		private canvas: fabric.ICanvas;
 		
-		get position(): Tools.Position {
-			return new Tools.Position(this.canvasObject.left + this.canvasObject.width / 2, this.canvasObject.top + this.canvasObject.height / 2);
+		private text: textField;
+		
+		get x(): number {
+			return this.canvasObject.left + this.canvasObject.width * this.canvasObject.scaleX / 2; 
 		}
 		
-		protected initSizable(object: fabric.IObject, canvas: fabric.ICanvas, position: Tools.Position, size: Tools.Size, interactable?: boolean, color?: string) {
+		get y(): number {
+			return this.canvasObject.top + this.canvasObject.height * this.canvasObject.scaleY / 2;
+		}
+		
+		protected initSizable(object: fabric.IObject, canvas: fabric.ICanvas, position: Tools.Position, size: Tools.Size, interactable?: boolean, color?: string, strokeColor?: string, strokeWidth?: number) {
 			this.canvas = canvas;
 			object.left = position.x;
 			object.top = position.y;
 			object.width = size.width;
 			object.height = size.height;
 			object.fill = color || "grey";
+			object.stroke = strokeColor || object.fill;
+			object.strokeWidth = strokeWidth || 0;;
+			object.setShadow({color: "rgba(0, 0, 0, 0.15)", offsetX: 4, offsetY: 4});
 			super.init(object, interactable);
 		}
 		
@@ -45,44 +57,42 @@ module visual {
 			var line = new connectingLine().initLine(this.canvas, this, dest, false, "grey");
 			this.canvas.sendToBack(line.canvasObject);			
 			
-			this.setConnection(dest, line);
-			dest.setConnection(this, line);
+			this.setConnection(line);
+			dest.setConnection(line);
 		}
 		
 		isConnectedWith(obj: sizableElement): boolean {
-			this.connectings.forEach(line => {
-				if(line.obj == obj) {
+			this.connections.forEach(line => {
+				if(line.contains(obj)) {
 					return true;
 				}
 			});
 			return false;
 		}
 		
-		private setConnection(obj: sizableElement, line: connectingLine) {
-			this.connectings.push(new oneSideConnecting(obj, line));
-			var object = this;
-			this.canvasObject.on("moving", function(e) {
-				var p = e.target;
-				object.connectings.forEach(item => {
-					if(item.obj == object){
-						item.line.canvasObject.set({'x1': item.obj.canvasObject.left, 'y1': item.obj.canvasObject.top})
-					} 
+		private setConnection(line: connectingLine) {
+			this.connections.push(line);
+			var obj = this;
+			var handler = function(e: Event){
+				obj.connections.forEach(item => {
+					item.updateNode(obj);
 				});
-			})
+			}
+			this.canvasObject.on({"moving": handler, "scaling" : handler });
 		}
 	}
 	
 	export class rectElement extends sizableElement {
-		initRect(canvas: fabric.ICanvas, position: Tools.Position, size: Tools.Size, interactable?: boolean, color?: string) {
+		initRect(canvas: fabric.ICanvas, position: Tools.Position, size: Tools.Size, interactable?: boolean, color?: string, strokeColor?: string) {
 			var object = new fabric.Rect();
-			super.initSizable(object, canvas, position, size, interactable, color);
+			super.initSizable(object, canvas, position, size, interactable, color, strokeColor, 3);
 			canvas.add(object);
 			return this;
 		}
 	}
 	
 	export class circleElement extends sizableElement {
-		initCircle(canvas: fabric.ICanvas, position: Tools.Position, radius: number, interactable?: boolean, color?: string) {
+		initCircle(canvas: fabric.ICanvas, position: Tools.Position, radius: number, interactable?: boolean, color?: string, strokeColor?: string) {
 			var object = new fabric.Circle();
 			object.radius = radius;
 			super.initSizable(object, canvas, position, new Tools.Size(radius, radius), interactable, color);
@@ -102,24 +112,41 @@ module visual {
 		}
 	}
 	
-	export class connectingLine extends visualElement {
+	class connectingLine extends visualElement {
+		private from: positioned;
+		private to: positioned;
+		private line: fabric.ILine;
+		
 		initLine(canvas: fabric.ICanvas, from: positioned, to: positioned, interactable?: boolean, color?: string, width: number = 1){
-			var object = new fabric.Line([from.position.x, from.position.y, to.position.x, to.position.y]);
+			this.from = from;
+			this.to = to;
+			var object = new fabric.Line([from.x, from.y, to.x, to.y]);
 			object.strokeWidth = width;
 			object.stroke = color;
 			super.init(object, interactable);
+			this.line = object;
 			canvas.add(object);
 			return this;
 		}
+		
+		updateNode(obj: positioned) {
+			(obj == this.from) && this.line.set({'x1': this.from.x, 'y1': this.from.y});
+			(obj == this.to) && this.line.set({'x2': this.to.x, 'y2': this.to.y});
+		}
+		
+		contains(obj: positioned) : boolean {
+			return this.from == obj || this.to == obj;
+		}
 	}
 	
-	class oneSideConnecting {
-		obj: sizableElement;
-		line: connectingLine;
-		
-		constructor(obj: sizableElement, line: connectingLine){
-			this.obj = obj;
-			this.line = line;
+	class textField {
+		constructor(canvas: fabric.ICanvas, parent: sizableElement) {
+			var object = new fabric.Text("Value", {"fontSize" : 14});
+			object.left = parent.canvasObject.left;
+			object.top = parent.canvasObject.top;
+			
+			var group = new fabric.Group([parent.canvasObject, object]);
+			canvas.add(group);
 		}
 	}
 }

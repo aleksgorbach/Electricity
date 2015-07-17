@@ -2,6 +2,7 @@
 ///<reference path="tools.ts"/>
 ///<reference path="visual/visual.ts"/>
 ///<reference path="../../js/typings/fabricjs/fabricjs.d.ts"/>
+///<reference path="interface/ui.ts"/>
 
  class Application {
      private canvas: fabric.ICanvas;
@@ -12,12 +13,14 @@
      }
 
      public init(): void {
-         var rect = new visual.rectElement().initRect(this.canvas, new Tools.Position(100, 200), new Tools.Size(200, 100), true, "green");
+         var rect = new visual.rectElement().initRect(this.canvas, new Tools.Position(100, 200), new Tools.Size(200, 100), true, "white", "green");
          var circle = new visual.circleElement().initCircle(this.canvas, new Tools.Position(400, 100), 20, false);
          var image = new visual.imageElement().initImage(this.canvas, new Tools.Position(400, 100), new Tools.Size(100, 100), '../Content/apps/complex/img/test.png', true);
          rect.connectWith(circle);
+         var toolbar = new ui.toolbar(this.canvas, 0, 0, 100);
+         toolbar.createToggle();
+         toolbar.createToggle();
      }
-
 
      public clear(): void {
          this.canvas.clear();
