@@ -1,7 +1,6 @@
 ﻿///<reference path="../../js/typings/jquery/jquery.d.ts"/>
 ///<reference path="tools.ts"/>
 ///<reference path="visual/visual.ts"/>
-///<reference path="../../js/typings/fabricjs/fabricjs.d.ts"/>
 ///<reference path="interface/ui.ts"/>
 
  class Application {
@@ -9,15 +8,16 @@
      private size: Tools.Size;
 
      constructor() {
-         this.canvas = new fabric.Canvas('canvas')
+         this.canvas = new fabric.Canvas('canvas');
      }
 
      public init(): void {
-         var rect = new visual.rectElement().initRect(this.canvas, new Tools.Position(100, 200), new Tools.Size(200, 100), true, "white", "green");
-         var circle = new visual.circleElement().initCircle(this.canvas, new Tools.Position(400, 100), 20, false);
-         var image = new visual.imageElement().initImage(this.canvas, new Tools.Position(400, 100), new Tools.Size(100, 100), '../Content/apps/complex/img/test.png', true);
+         var rect = new Visual.RectElement().initRect(this.canvas, new Tools.Position(100, 200), new Tools.Size(200, 100), true, "white", "green");
+         var circle = new Visual.CircleElement().initCircle(this.canvas, new Tools.Position(400, 100), 20, false);
+         var image = new Visual.ImageElement().initImage(this.canvas, new Tools.Position(400, 100), new Tools.Size(100, 100), '../Content/apps/complex/img/test.png', true);
          rect.connectWith(circle);
-         var toolbar = new ui.toolbar(this.canvas, 0, 0, 100);
+         var toolbar = new Ui.Toolbar(this.canvas, 0, 0, 100, 100);
+         toolbar.createToggle();
          toolbar.createToggle();
          toolbar.createToggle();
      }

@@ -25,48 +25,49 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-var visual;
-(function (visual) {
-    var visualElement = (function () {
-        function visualElement() {
+var Visual;
+(function (Visual) {
+    var VisualElement = (function () {
+        function VisualElement() {
         }
-        Object.defineProperty(visualElement.prototype, "canvasObject", {
+        Object.defineProperty(VisualElement.prototype, "canvasObject", {
             get: function () {
                 return this.object;
             },
             enumerable: true,
             configurable: true
         });
-        visualElement.prototype.init = function (object, interactable) {
+        VisualElement.prototype.init = function (object, interactable) {
             this.object = object;
             object.selectable = interactable || false;
             object.hasBorders = false;
             object.hasControls = false;
             object.hasRotatingPoint = false;
         };
-        return visualElement;
+        return VisualElement;
     })();
-    var sizableElement = (function (_super) {
-        __extends(sizableElement, _super);
-        function sizableElement() {
+    Visual.VisualElement = VisualElement;
+    var SizableElement = (function (_super) {
+        __extends(SizableElement, _super);
+        function SizableElement() {
             _super.apply(this, arguments);
             this.connections = [];
         }
-        Object.defineProperty(sizableElement.prototype, "x", {
+        Object.defineProperty(SizableElement.prototype, "x", {
             get: function () {
                 return this.canvasObject.left + this.canvasObject.width * this.canvasObject.scaleX / 2;
             },
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(sizableElement.prototype, "y", {
+        Object.defineProperty(SizableElement.prototype, "y", {
             get: function () {
                 return this.canvasObject.top + this.canvasObject.height * this.canvasObject.scaleY / 2;
             },
             enumerable: true,
             configurable: true
         });
-        sizableElement.prototype.initSizable = function (object, canvas, position, size, interactable, color, strokeColor, strokeWidth) {
+        SizableElement.prototype.initSizable = function (object, canvas, position, size, interactable, color, strokeColor, strokeWidth) {
             this.canvas = canvas;
             object.left = position.x;
             object.top = position.y;
@@ -79,70 +80,72 @@ var visual;
             object.setShadow({ color: "rgba(0, 0, 0, 0.15)", offsetX: 4, offsetY: 4 });
             _super.prototype.init.call(this, object, interactable);
         };
-        sizableElement.prototype.connectWith = function (dest) {
+        SizableElement.prototype.connectWith = function (dest) {
             if (this.isConnectedWith(dest)) {
                 return;
             }
-            var line = new connectingLine().initLine(this.canvas, this, dest, false, "grey");
+            var line = new ConnectingLine().initLine(this.canvas, this, dest, false, "grey");
             this.canvas.sendToBack(line.canvasObject);
             this.setConnection(line);
             dest.setConnection(line);
         };
-        sizableElement.prototype.isConnectedWith = function (obj) {
+        SizableElement.prototype.isConnectedWith = function (obj) {
+            var connected = false;
             this.connections.forEach(function (line) {
                 if (line.contains(obj)) {
-                    return true;
+                    connected = true;
                 }
             });
-            return false;
+            return connected;
         };
-        sizableElement.prototype.setConnection = function (line) {
+        SizableElement.prototype.setConnection = function (line) {
+            var _this = this;
             this.connections.push(line);
-            var obj = this;
-            var handler = function (e) {
-                obj.connections.forEach(function (item) {
-                    item.updateNode(obj);
+            var handler = function () {
+                _this.connections.forEach(function (item) {
+                    item.updateNode(_this);
                 });
             };
             this.canvasObject.on({ "moving": handler, "scaling": handler });
         };
-        return sizableElement;
-    })(visualElement);
-    var rectElement = (function (_super) {
-        __extends(rectElement, _super);
-        function rectElement() {
+        return SizableElement;
+    })(VisualElement);
+    Visual.SizableElement = SizableElement;
+    var RectElement = (function (_super) {
+        __extends(RectElement, _super);
+        function RectElement() {
             _super.apply(this, arguments);
         }
-        rectElement.prototype.initRect = function (canvas, position, size, interactable, color, strokeColor) {
+        RectElement.prototype.initRect = function (canvas, position, size, interactable, color, strokeColor) {
             var object = new fabric.Rect();
             _super.prototype.initSizable.call(this, object, canvas, position, size, interactable, color, strokeColor, 3);
             canvas.add(object);
             return this;
         };
-        return rectElement;
-    })(sizableElement);
-    visual.rectElement = rectElement;
-    var circleElement = (function (_super) {
-        __extends(circleElement, _super);
-        function circleElement() {
+        return RectElement;
+    })(SizableElement);
+    Visual.RectElement = RectElement;
+    var CircleElement = (function (_super) {
+        __extends(CircleElement, _super);
+        function CircleElement() {
             _super.apply(this, arguments);
         }
-        circleElement.prototype.initCircle = function (canvas, position, radius, interactable, color, strokeColor) {
+        CircleElement.prototype.initCircle = function (canvas, position, radius, interactable, color, strokeColor) {
             var object = new fabric.Circle();
             object.radius = radius;
             _super.prototype.initSizable.call(this, object, canvas, position, new Tools.Size(radius, radius), interactable, color);
             canvas.add(object);
             return this;
         };
-        return circleElement;
-    })(sizableElement);
-    visual.circleElement = circleElement;
-    var imageElement = (function (_super) {
-        __extends(imageElement, _super);
-        function imageElement() {
+        return CircleElement;
+    })(SizableElement);
+    Visual.CircleElement = CircleElement;
+    var ImageElement = (function (_super) {
+        __extends(ImageElement, _super);
+        function ImageElement() {
             _super.apply(this, arguments);
         }
-        imageElement.prototype.initImage = function (canvas, position, size, url, interactable) {
+        ImageElement.prototype.initImage = function (canvas, position, size, url, interactable) {
             var superFunc = _super.prototype.initSizable;
             fabric.Image.fromURL(url, function (img) {
                 superFunc(img, canvas, position, size, interactable, "white");
@@ -150,15 +153,15 @@ var visual;
             });
             return this;
         };
-        return imageElement;
-    })(sizableElement);
-    visual.imageElement = imageElement;
-    var connectingLine = (function (_super) {
-        __extends(connectingLine, _super);
-        function connectingLine() {
+        return ImageElement;
+    })(SizableElement);
+    Visual.ImageElement = ImageElement;
+    var ConnectingLine = (function (_super) {
+        __extends(ConnectingLine, _super);
+        function ConnectingLine() {
             _super.apply(this, arguments);
         }
-        connectingLine.prototype.initLine = function (canvas, from, to, interactable, color, width) {
+        ConnectingLine.prototype.initLine = function (canvas, from, to, interactable, color, width) {
             if (width === void 0) { width = 1; }
             this.from = from;
             this.to = to;
@@ -170,67 +173,66 @@ var visual;
             canvas.add(object);
             return this;
         };
-        connectingLine.prototype.updateNode = function (obj) {
-            (obj == this.from) && this.line.set({ 'x1': this.from.x, 'y1': this.from.y });
-            (obj == this.to) && this.line.set({ 'x2': this.to.x, 'y2': this.to.y });
+        ConnectingLine.prototype.updateNode = function (obj) {
+            (obj === this.from) && this.line.set({ 'x1': this.from.x, 'y1': this.from.y });
+            (obj === this.to) && this.line.set({ 'x2': this.to.x, 'y2': this.to.y });
         };
-        connectingLine.prototype.contains = function (obj) {
-            return this.from == obj || this.to == obj;
+        ConnectingLine.prototype.contains = function (obj) {
+            return this.from === obj || this.to === obj;
         };
-        return connectingLine;
-    })(visualElement);
-    var textField = (function () {
-        function textField(canvas, parent) {
+        return ConnectingLine;
+    })(VisualElement);
+    var TextField = (function () {
+        function TextField(canvas, parent) {
             var object = new fabric.Text("Value", { "fontSize": 14 });
             object.left = parent.canvasObject.left;
             object.top = parent.canvasObject.top;
             var group = new fabric.Group([parent.canvasObject, object]);
             canvas.add(group);
         }
-        return textField;
+        return TextField;
     })();
-})(visual || (visual = {}));
+})(Visual || (Visual = {}));
 ///<reference path="../../../js/typings/fabricjs/fabricjs.d.ts"/>
-var ui;
-(function (ui) {
-    var toolbar = (function () {
-        function toolbar(canvas, xPos, yPos, height) {
+var Ui;
+(function (Ui) {
+    var Toolbar = (function () {
+        function Toolbar(canvas, xPos, yPos, height, controlSize) {
             this.controls = [];
             this.canvas = canvas;
             this.x = xPos;
             this.y = yPos;
             this.height = height;
+            this.elementSize = controlSize;
         }
-        toolbar.prototype.createToggle = function () {
-            var t = new toggle();
-            var left = 0;
-            this.controls.forEach(function (elem) {
-                left += elem.size;
-            });
+        Toolbar.prototype.createToggle = function () {
+            var t = new Toggle();
+            var left = this.controls.length * this.elementSize;
             t.initToggle(this.canvas, this.x + left, this.y, 100, this.height, "../Content/apps/complex/img/test.png");
             this.controls.push(t);
         };
-        return toolbar;
+        return Toolbar;
     })();
-    ui.toolbar = toolbar;
-    var control = (function () {
-        function control() {
+    Ui.Toolbar = Toolbar;
+    var Control = (function () {
+        function Control() {
         }
-        control.prototype.onClick = function (e) {
-            alert(this);
+        Control.prototype.onClick = function () {
+            console.log("click");
         };
-        control.prototype.init = function (object, width) {
+        Control.prototype.init = function (object, width) {
             this.object = object;
-            object.on("mouse:down", this.onClick);
+            object.selectable = false;
+            object.on("mousedown", this.onClick);
         };
-        return control;
+        return Control;
     })();
-    var toggle = (function (_super) {
-        __extends(toggle, _super);
-        function toggle() {
+    var Toggle = (function (_super) {
+        __extends(Toggle, _super);
+        function Toggle() {
             _super.apply(this, arguments);
         }
-        toggle.prototype.initToggle = function (canvas, x, y, width, height, url) {
+        Toggle.prototype.initToggle = function (canvas, x, y, width, height, url) {
             var init = this.init;
             fabric.Image.fromURL(url, function (img) {
                 img.width = width;
@@ -241,24 +243,24 @@ var ui;
                 canvas.add(img);
             });
         };
-        return toggle;
-    })(control);
-})(ui || (ui = {}));
+        return Toggle;
+    })(Control);
+})(Ui || (Ui = {}));
 ///<reference path="../../js/typings/jquery/jquery.d.ts"/>
 ///<reference path="tools.ts"/>
 ///<reference path="visual/visual.ts"/>
-///<reference path="../../js/typings/fabricjs/fabricjs.d.ts"/>
 ///<reference path="interface/ui.ts"/>
 var Application = (function () {
     function Application() {
         this.canvas = new fabric.Canvas('canvas');
     }
     Application.prototype.init = function () {
-        var rect = new visual.rectElement().initRect(this.canvas, new Tools.Position(100, 200), new Tools.Size(200, 100), true, "white", "green");
-        var circle = new visual.circleElement().initCircle(this.canvas, new Tools.Position(400, 100), 20, false);
-        var image = new visual.imageElement().initImage(this.canvas, new Tools.Position(400, 100), new Tools.Size(100, 100), '../Content/apps/complex/img/test.png', true);
+        var rect = new Visual.RectElement().initRect(this.canvas, new Tools.Position(100, 200), new Tools.Size(200, 100), true, "white", "green");
+        var circle = new Visual.CircleElement().initCircle(this.canvas, new Tools.Position(400, 100), 20, false);
+        var image = new Visual.ImageElement().initImage(this.canvas, new Tools.Position(400, 100), new Tools.Size(100, 100), '../Content/apps/complex/img/test.png', true);
         rect.connectWith(circle);
-        var toolbar = new ui.toolbar(this.canvas, 0, 0, 100);
+        var toolbar = new Ui.Toolbar(this.canvas, 0, 0, 100, 100);
+        toolbar.createToggle();
         toolbar.createToggle();
         toolbar.createToggle();
     };
