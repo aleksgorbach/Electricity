@@ -1,5 +1,5 @@
-module input {
-	export class inputController {
+module Input {
+	export class InputController {
 		
 	}
 }

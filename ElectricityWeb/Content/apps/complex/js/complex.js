@@ -17,7 +17,6 @@ var Tools;
     })();
     Tools.Position = Position;
 })(Tools || (Tools = {}));
-///<reference path="../../../js/typings/fabricjs/fabricjs.d.ts"/>
 ///<reference path="../tools.ts"/>
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -27,6 +26,7 @@ var __extends = this.__extends || function (d, b) {
 };
 var Visual;
 (function (Visual) {
+    var Size = Tools.Size;
     var VisualElement = (function () {
         function VisualElement() {
         }
@@ -78,7 +78,12 @@ var Visual;
             object.strokeWidth = strokeWidth || 0;
             ;
             object.setShadow({ color: "rgba(0, 0, 0, 0.15)", offsetX: 4, offsetY: 4 });
+            var self = this;
+            object.on("mousedown", function () { return self.onClick(); });
             _super.prototype.init.call(this, object, interactable);
+        };
+        SizableElement.prototype.onClick = function () {
+            Application.instance.toolbar.activeTool.clickHandler.onElementClick(this);
         };
         SizableElement.prototype.connectWith = function (dest) {
             if (this.isConnectedWith(dest)) {
@@ -108,6 +113,14 @@ var Visual;
             };
             this.canvasObject.on({ "moving": handler, "scaling": handler });
         };
+        Object.defineProperty(SizableElement.prototype, "selected", {
+            set: function (val) {
+                var canvas = Application.instance.canvas;
+                this.canvasObject.animate("strokeWidth", val ? 4 : 0, { onChange: canvas.renderAll.bind(canvas) });
+            },
+            enumerable: true,
+            configurable: true
+        });
         return SizableElement;
     })(VisualElement);
     Visual.SizableElement = SizableElement;
@@ -116,8 +129,9 @@ var Visual;
         function RectElement() {
             _super.apply(this, arguments);
         }
-        RectElement.prototype.initRect = function (canvas, position, size, interactable, color, strokeColor) {
+        RectElement.prototype.initRect = function (position, size, interactable, color, strokeColor) {
             var object = new fabric.Rect();
+            var canvas = Application.instance.canvas;
             _super.prototype.initSizable.call(this, object, canvas, position, size, interactable, color, strokeColor, 3);
             canvas.add(object);
             return this;
@@ -130,10 +144,11 @@ var Visual;
         function CircleElement() {
             _super.apply(this, arguments);
         }
-        CircleElement.prototype.initCircle = function (canvas, position, radius, interactable, color, strokeColor) {
+        CircleElement.prototype.initCircle = function (position, radius, interactable, color, strokeColor) {
             var object = new fabric.Circle();
+            var canvas = Application.instance.canvas;
             object.radius = radius;
-            _super.prototype.initSizable.call(this, object, canvas, position, new Tools.Size(radius, radius), interactable, color);
+            _super.prototype.initSizable.call(this, object, canvas, position, new Size(radius, radius), interactable, color);
             canvas.add(object);
             return this;
         };
@@ -145,11 +160,12 @@ var Visual;
         function ImageElement() {
             _super.apply(this, arguments);
         }
-        ImageElement.prototype.initImage = function (canvas, position, size, url, interactable) {
-            var superFunc = _super.prototype.initSizable;
+        ImageElement.prototype.initImage = function (position, size, url, interactable) {
+            var canvas = Application.instance.canvas;
+            var self = this;
             fabric.Image.fromURL(url, function (img) {
-                superFunc(img, canvas, position, size, interactable, "white");
                 canvas.add(img);
+                self.initSizable(img, canvas, position, size, interactable, "white");
             });
             return this;
         };
@@ -193,13 +209,12 @@ var Visual;
         return TextField;
     })();
 })(Visual || (Visual = {}));
-///<reference path="../../../js/typings/fabricjs/fabricjs.d.ts"/>
 var Ui;
 (function (Ui) {
     var Toolbar = (function () {
-        function Toolbar(canvas, xPos, yPos, height, controlSize) {
+        function Toolbar(app, xPos, yPos, height, controlSize) {
             this.controls = [];
-            this.canvas = canvas;
+            this.app = app;
             this.x = xPos;
             this.y = yPos;
             this.height = height;
@@ -208,78 +223,112 @@ var Ui;
         Toolbar.prototype.createToggle = function () {
             var t = new Toggle();
             var left = this.controls.length * this.elementSize;
-            t.initToggle(this.canvas, this.x + left, this.y, 100, this.height, "../Content/apps/complex/img/test.png");
+            t.initToggle(this.app.canvas, this, this.x + left, this.y, this.elementSize, this.height, "../Content/apps/complex/img/select.png");
             this.controls.push(t);
+        };
+        Toolbar.prototype.onControlClicked = function (control) {
+            var _this = this;
+            this.controls.forEach(function (x) {
+                x.changeState(x === control);
+                if (x === control) {
+                    _this.activeTool = x;
+                }
+            });
         };
         return Toolbar;
     })();
     Ui.Toolbar = Toolbar;
-    var Control = (function () {
-        function Control() {
-        }
-        Control.prototype.onClick = function () {
-            console.log("click");
-        };
-        Control.prototype.init = function (object, width) {
-            this.object = object;
-            object.selectable = false;
-            object.on("mousedown", this.onClick);
-        };
-        return Control;
-    })();
-    var Toggle = (function (_super) {
-        __extends(Toggle, _super);
+    var Toggle = (function () {
         function Toggle() {
-            _super.apply(this, arguments);
         }
-        Toggle.prototype.initToggle = function (canvas, x, y, width, height, url) {
-            var init = this.init;
+        Toggle.prototype.initToggle = function (canvas, toolbar, x, y, width, height, url) {
+            var self = this;
+            this.toolbar = toolbar;
+            this.size = width;
+            this.tool = new SelectTool();
+            var onClick = function () { return self.onClick(self); };
             fabric.Image.fromURL(url, function (img) {
                 img.width = width;
                 img.height = height;
                 img.left = x;
                 img.top = y;
-                init(img, width);
+                img.selectable = false;
+                img.on("mousedown", onClick);
+                self.object = img;
                 canvas.add(img);
             });
         };
+        Toggle.prototype.onClick = function (self) {
+            self.toolbar.onControlClicked(self);
+        };
+        Toggle.prototype.changeState = function (state) {
+            this.object.setShadow({ color: "rgba(0, 0, 0, 0.15)", offsetX: 0, offsetY: state ? 7 : 0 });
+        };
+        Object.defineProperty(Toggle.prototype, "clickHandler", {
+            get: function () {
+                return this.tool;
+            },
+            enumerable: true,
+            configurable: true
+        });
         return Toggle;
-    })(Control);
+    })();
+    var SelectTool = (function () {
+        function SelectTool() {
+        }
+        SelectTool.prototype.onElementClick = function (element) {
+            Application.instance.deselect();
+            element.selected = true;
+        };
+        return SelectTool;
+    })();
 })(Ui || (Ui = {}));
-///<reference path="../../js/typings/jquery/jquery.d.ts"/>
-///<reference path="tools.ts"/>
 ///<reference path="visual/visual.ts"/>
 ///<reference path="interface/ui.ts"/>
 var Application = (function () {
     function Application() {
-        this.canvas = new fabric.Canvas('canvas');
+        this.elements = [];
+        this.canvas = new fabric.Canvas("canvas");
     }
+    Object.defineProperty(Application, "instance", {
+        get: function () {
+            if (this.instanceInternal == null) {
+                this.instanceInternal = new Application();
+            }
+            return this.instanceInternal;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Application.prototype.init = function () {
-        var rect = new Visual.RectElement().initRect(this.canvas, new Tools.Position(100, 200), new Tools.Size(200, 100), true, "white", "green");
-        var circle = new Visual.CircleElement().initCircle(this.canvas, new Tools.Position(400, 100), 20, false);
-        var image = new Visual.ImageElement().initImage(this.canvas, new Tools.Position(400, 100), new Tools.Size(100, 100), '../Content/apps/complex/img/test.png', true);
+        var rect = new Visual.RectElement().initRect(new Tools.Position(100, 200), new Tools.Size(200, 100), true, "white", "green");
+        var circle = new Visual.CircleElement().initCircle(new Tools.Position(400, 100), 20, false);
+        var image = new Visual.ImageElement().initImage(new Tools.Position(400, 100), new Tools.Size(100, 100), "../Content/apps/complex/img/test.png", true);
         rect.connectWith(circle);
-        var toolbar = new Ui.Toolbar(this.canvas, 0, 0, 100, 100);
-        toolbar.createToggle();
-        toolbar.createToggle();
-        toolbar.createToggle();
+        this.elements.push(rect, circle, image);
+        this.toolbar = new Ui.Toolbar(this, 0, 0, 100, 100);
+        this.toolbar.createToggle();
+        this.toolbar.createToggle();
+        this.toolbar.createToggle();
     };
     Application.prototype.clear = function () {
         this.canvas.clear();
     };
+    Application.prototype.deselect = function () {
+        this.elements.forEach(function (elem) { return elem.selected = false; });
+    };
     return Application;
 })();
-var application = new Application();
-application.init();
-var input;
-(function (input) {
-    var inputController = (function () {
-        function inputController() {
+Application.instance.init();
+var Input;
+(function (Input) {
+    var InputController = (function () {
+        function InputController() {
         }
-        return inputController;
+        return InputController;
     })();
-    input.inputController = inputController;
-})(input || (input = {}));
+    Input.InputController = InputController;
+})(Input || (Input = {}));
 ///<reference path="../../../../js/typings/fabricjs/fabricjs.d.ts"/>
 var creator;
 (function (creator_1) {

@@ -23,7 +23,7 @@
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
-    <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
     <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
     <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
     <FileUpgradeFlags>
@@ -177,7 +177,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="Content\apps\complex\img\test.png" />
+    <Content Include="Content\apps\complex\img\delete.svg" />
+    <Content Include="Content\apps\complex\img\select.png" />
     <Content Include="Content\apps\complex\js\complex.js" />
     <Content Include="Content\apps\complex\js\min\complex.min.js" />
     <Content Include="Content\apps\complex\min\complex.min.js" />
@@ -369,6 +370,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="Content\apps\complex\complex.ts" />
     <TypeScriptCompile Include="Content\apps\complex\input\input.ts" />
+    <TypeScriptCompile Include="Content\apps\complex\interface\tools.ts" />
     <TypeScriptCompile Include="Content\apps\complex\interface\ui.ts" />
     <TypeScriptCompile Include="Content\apps\complex\tools.ts" />
     <TypeScriptCompile Include="Content\apps\complex\visual\creating\creator.ts" />
