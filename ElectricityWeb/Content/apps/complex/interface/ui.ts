@@ -1,29 +1,27 @@
+///<reference path="styles.ts"/>
+
 module Ui {
     import SizableElement = Visual.SizableElement;
 
     export class Toolbar {
+        private offset = 3;
         private app: Application;
         private controls: IToolbarElement[] = [];
+        private position: Tools.Position;
+        private controlSize: Tools.Size;
 
-        private x: number;
-        private y: number;
-        private height: number;
-        private elementSize: number;
+        activeTool: IToolbarElement;
 
-        public activeTool: IToolbarElement;
-
-        constructor(app: Application, xPos: number, yPos: number, height: number, controlSize: number) {
-            this.app = app;
-            this.x = xPos;
-            this.y = yPos;
-            this.height = height;
-            this.elementSize = controlSize;
+        constructor(position: Tools.Position, controlSize: Tools.Size, ...tools: IToolAction[]) {
+            this.position = position;
+            this.controlSize = controlSize;
+            tools.forEach(tool => this.createToggle(tool));
         }
 
-        createToggle() {
+        private createToggle(tool: IToolAction) {
             var t = new Toggle();
-            var left: number = this.controls.length * this.elementSize;
-            t.initToggle(this.app.canvas, this, this.x + left, this.y, this.elementSize, this.height, new SelectTool());
+            var left = this.controls.length * (this.controlSize.width + this.offset);
+            t.initToggle(this, new Tools.Position(this.position.x + left, this.position.y), this.controlSize, tool);
             this.controls.push(t);
         }
 
@@ -43,29 +41,31 @@ module Ui {
     }
 
     class Toggle implements IToolbarElement {
-        public object: fabric.IObject;
+        object: fabric.IObject;
 
-        size: number;
+        size: Tools.Size;
+
         private checked: boolean;
         private toolbar: Toolbar;
         private tool: IToolAction;
 
-        initToggle(canvas: fabric.ICanvas, toolbar: Toolbar, x: number, y: number, width: number, height: number, tool: IToolAction) {
+        initToggle(toolbar: Toolbar, position: Tools.Position, size: Tools.Size, tool: IToolAction) {
             var self = this;
             this.toolbar = toolbar;
-            this.size = width;
+            this.size = size;
             this.tool = tool;
             
             var onClick = () => self.onClick(self);
             fabric.Image.fromURL(tool.imgUrl, img => {
-                img.width = width;
-                img.height = height;
-                img.left = x;
-                img.top = y;
+                img.width = size.width;
+                img.height = size.height;
+                img.left = position.x;
+                img.top = position.y;
                 img.selectable = false;
                 img.on("mousedown", onClick);
                 self.object = img;
-                canvas.add(img);
+                self.changeState(false);
+                Application.instance.canvas.add(img);
             });
         }
 
@@ -74,7 +74,7 @@ module Ui {
         }
 
         changeState(state: boolean) {
-            this.object.setShadow({ color: "rgba(0, 0, 0, 0.15)", offsetX: 0, offsetY: state ? 7 : 0 });
+            this.object.set(state ? activeBorder : inactiveBorder);
         }
 
         get clickHandler(): IToolAction {
@@ -85,16 +85,5 @@ module Ui {
     export interface IToolAction {
         onElementClick(element: SizableElement);
         imgUrl: string;
-    }
-
-    class SelectTool implements IToolAction {
-        onElementClick(element: SizableElement) {
-            Application.instance.deselect();
-            element.selected = true;
-        }
-
-        get imgUrl(): string {
-            return "../Content/apps/complex/img/select.png";
-        }
     }
 }

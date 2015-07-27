@@ -177,11 +177,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\apps\complex\img\connect.svg" />
     <Content Include="Content\apps\complex\img\delete.svg" />
     <Content Include="Content\apps\complex\img\select.png" />
     <Content Include="Content\apps\complex\js\complex.js" />
     <Content Include="Content\apps\complex\js\min\complex.min.js" />
-    <Content Include="Content\apps\complex\min\complex.min.js" />
     <Content Include="Content\css\complex.css">
       <DependentUpon>complex.scss</DependentUpon>
     </Content>
@@ -369,10 +369,10 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Content\apps\complex\complex.ts" />
-    <TypeScriptCompile Include="Content\apps\complex\input\input.ts" />
+    <TypeScriptCompile Include="Content\apps\complex\interface\styles.ts" />
     <TypeScriptCompile Include="Content\apps\complex\interface\tools.ts" />
     <TypeScriptCompile Include="Content\apps\complex\interface\ui.ts" />
-    <TypeScriptCompile Include="Content\apps\complex\tools.ts" />
+    <TypeScriptCompile Include="Content\apps\complex\tools\tools.ts" />
     <TypeScriptCompile Include="Content\apps\complex\visual\creating\creator.ts" />
     <TypeScriptCompile Include="Content\apps\complex\visual\visual.ts" />
     <TypeScriptCompile Include="Content\js\typings\jquery\jquery.d.ts" />

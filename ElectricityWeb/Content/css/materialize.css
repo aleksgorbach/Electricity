@@ -1,4 +1,5 @@
-﻿.materialize-red.lighten-5 {
+﻿/* ReSharper disable CssNotResolved */
+.materialize-red.lighten-5 {
   background-color: #fdeaeb !important; }
 
 .materialize-red-text.text-lighten-5 {
@@ -7919,3 +7920,5 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 @media (min-height: 40.125em) {
   .picker--time .picker__box {
     margin-bottom: 5em; } }
+
+/* ReSharper restore CssNotResolved */

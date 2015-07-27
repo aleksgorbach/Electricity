@@ -1,16 +1,17 @@
 ﻿///<reference path="visual/visual.ts"/>
 ///<reference path="interface/ui.ts"/>
+///<reference path="interface/tools.ts"/>
 
 class Application {
-    
     canvas: fabric.ICanvas;
     toolbar: Ui.Toolbar;
     private size: Tools.Size;
 
-    private elements: Visual.SizableElement[] = [];
+    elements: Tools.CanvasObjects;
 
     constructor() {
         this.canvas = new fabric.Canvas("canvas");
+        this.elements = new Tools.CanvasObjects(this.canvas);
     }
 
     private static instanceInternal: Application;
@@ -22,16 +23,16 @@ class Application {
         return this.instanceInternal;
     }
 
-    public init(): void {
-        var rect = new Visual.RectElement().initRect(new Tools.Position(100, 200), new Tools.Size(200, 100), true, "white", "green");
+    init(): void {
+        var rect = new Visual.RectElement().initRect(new Tools.Position(100, 200), new Tools.Size(200, 100), true, "#eee");
         var circle = new Visual.CircleElement().initCircle(new Tools.Position(400, 100), 20, false);
-        var image = new Visual.ImageElement().initImage(new Tools.Position(400, 100), new Tools.Size(100, 100), "../Content/apps/complex/img/test.png", true);
-        rect.connectWith(circle);
-        this.elements.push(rect, circle, image);
-        this.toolbar = new Ui.Toolbar(this, 0, 0, 100, 100);
-        this.toolbar.createToggle();
-        this.toolbar.createToggle();
-        this.toolbar.createToggle();
+        //var connection = rect.connectWith(circle);
+        this.elements.add(rect, circle);
+        var toolbar = new Ui.Toolbar(new Tools.Position(0, 0), new Tools.Size(80, 80),
+            new Ui.SelectTool(),
+            new Ui.DeleteTool(),
+            new Ui.ConnectTool());
+        this.toolbar = toolbar;
     }
 
     clear(): void {
@@ -39,7 +40,7 @@ class Application {
     }
 
     deselect() {
-        this.elements.forEach(elem => elem.selected = false);
+        this.elements.all<Visual.SizableElement>().forEach(elem => elem.selected = false);
     }
 }
 
